@@ -1,3 +1,6 @@
+from config import slang_words, posemoticons, negemoticons, other_emoticons, \
+    EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji
+
 # 1. remove URL and USERNAME (anonymization)
 def remove_url_and_username(line):
     line = line.replace('URL', '')
