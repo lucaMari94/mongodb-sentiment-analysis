@@ -1,10 +1,60 @@
+import re
 from config import slang_words, posemoticons, negemoticons, other_emoticons, \
-    EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji
+    EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
+
+# hashtag array
+h_dictionary = []
 
 # 1. remove URL and USERNAME (anonymization)
 def remove_url_and_username(line):
     line = line.replace('URL', '')
     line = line.replace('USERNAME', '')
+    return line
+
+# 2. process hash-tag: collect hash-tag(#) (list)
+def process_h(line):
+    pat = re.compile(r"#(\w+)")
+
+    # hashtag array [string, ...]
+    h_array = pat.findall(line)
+    for element in h_array:
+        h_dictionary.append(element)
+        line = line.replace('#'+element, '')
+    return line
+
+# 3. process emoji and emoticons (list)
+def process_emoji_and_emoticons(line):
+    for element in posemoticons:
+        line = line.replace(element, '')
+
+    for element in negemoticons:
+        line = line.replace(element, '')
+
+    for element in other_emoticons:
+        line = line.replace(element, '')
+
+    for element in EmojiPos:
+        line = line.replace(element, '')
+
+    for element in EmojiNeg:
+        line = line.replace(element, '')
+
+    for element in OthersEmoji:
+        line = line.replace(element, '')
+
+    for element in AdditionalEmoji:
+        line = line.replace(element, '')
+
+    for element in MyEmoji:
+        line = line.replace(element, '')
+
+    return line
+
+# 4. treatment punctuation marks and substitution with spaces
+def treatment_punctuation(line):
+    for element in punctuation:
+        line = line.replace(element, '')
+
     return line
 
 # filename dataset_sentiment
@@ -20,13 +70,16 @@ myfile.close()
 for line in contents.splitlines():
     # 1. remove URL and USERNAME
     line = remove_url_and_username(line)
-    print(line)
+    # print(line)
+
     # 2. process hash-tag: collect hash-tag(#) (list)
+    line = process_h(line)
 
     # 3. process emoji and emoticons (list)
+    line = process_emoji_and_emoticons(line)
 
     # 4. treatment punctuation marks and substitution with spaces
-    # [,?!.;:\/()& _+=<>"]
+    line = treatment_punctuation(line)
 
     # 5. transformation to lower case
 
