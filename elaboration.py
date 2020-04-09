@@ -1,4 +1,8 @@
 import re
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import wordnet as wn
+from nltk.corpus import stopwords
 from config import slang_words, posemoticons, negemoticons, other_emoticons, \
     EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
 
@@ -57,6 +61,48 @@ def treatment_punctuation(line):
 
     return line
 
+# 7. process slang word and acronyms (list)
+def replace_slang(tokens):
+    for i, element in enumerate(tokens):
+        for slang_word in slang_words:
+            if element == slang_word:
+                tokens[i] = slang_words.get(slang_word)
+    return tokens
+
+"""
+    Convert POS tag from Penn tagset to WordNet tagset.
+    :param tag: a tag from Penn tagset
+    :return: a tag from WordNet tagset or None if no corresponding tag could be found
+"""
+def pos_tag_convert(tag):
+    """if tag in ['JJ', 'JJR', 'JJS']:
+        return wn.ADJ
+    elif tag in ['RB', 'RBR', 'RBS']:
+        return wn.ADV
+    elif tag in ['NN', 'NNS', 'NNP', 'NNPS']:
+        return wn.NOUN
+    elif tag in ['VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ']:
+        return wn.VERB
+    return None"""
+    if tag.startswith('J'):
+        return wn.ADJ
+    elif tag.startswith('V'):
+        return wn.VERB
+    elif tag.startswith('N'):
+        return wn.NOUN
+    elif tag.startswith('R'):
+        return wn.ADV
+    else:
+        return wn.NOUN
+
+def lemmatization(lemmatizer, tagged):
+    result_lemma = []
+    for element, tag in tagged:
+        # print(pos_tag_convert(tag))
+        lemma = lemmatizer.lemmatize(element, pos_tag_convert(tag))
+        result_lemma.append(lemma)
+    return result_lemma
+
 # filename dataset_sentiment
 dataset_sentiment = "trust";
 
@@ -64,8 +110,6 @@ dataset_sentiment = "trust";
 myfile = open("twitter_message/dataset_dt_" + dataset_sentiment + "_60k.txt", "rt", encoding='utf-8')
 contents = myfile.read()
 myfile.close()
-
-# i = 0
 
 for line in contents.splitlines():
     # 1. remove URL and USERNAME
@@ -82,16 +126,26 @@ for line in contents.splitlines():
     line = treatment_punctuation(line)
 
     # 5. transformation to lower case
+    line = line.lower()
 
     # 6. sentence tokenisation
+    tokens = nltk.word_tokenize(line)
 
     # 7. process slang word and acronyms (list)
+    tokens = replace_slang(tokens)
 
     # 8. POS tagging
+    tagged = nltk.pos_tag(tokens)
+    # print(tagged)
 
     # 9. lemmatization
+    lemmatizer = WordNetLemmatizer()
+    result_lemma = lemmatization(lemmatizer, tagged)
 
     # 10. stop words elimination
+    stop_words = set(stopwords.words('english'))
+    filtered_sentence = [word for word in result_lemma if not word in stop_words]
+    print(filtered_sentence)
 
     # 11. stem frequency counting (for each word)
     # fdist = nltk.FreqDist(words_without_stopwords).most_common()
