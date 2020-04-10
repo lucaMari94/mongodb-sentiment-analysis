@@ -4,6 +4,7 @@
     <list default="true" id="bcf6d855-1851-45d0-a98a-91ff298407fa" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elaboration.py" beforeDir="false" afterPath="$PROJECT_DIR$/elaboration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twitter_message/dataset_dt_trust_60k.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_message/dataset_dt_trust_60k.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +37,7 @@
       <recent name="C:\Users\luca\Desktop\MAADB\maadb" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.elaboration">
     <configuration name="elaboration" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="maadb" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -58,9 +59,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="maadb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.elaboration" />
+        <item itemvalue="Python.test2" />
       </list>
     </recent_temporary>
   </component>
@@ -110,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586439433349</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="step 1">
+      <created>1586444289619</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1586444289619</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -119,33 +149,34 @@
     <MESSAGE value="add mapreduce img" />
     <MESSAGE value="add import from config" />
     <MESSAGE value="do 4 point" />
-    <option name="LAST_COMMIT_MESSAGE" value="do 4 point" />
+    <MESSAGE value="step 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="step 1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1586439432597">
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1586444288922">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586439432597" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586444288922" />
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1586262849990">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586262849990" />
-    <state width="1071" height="240" key="GridCell.Tab.0.bottom" timestamp="1586444046488">
+    <state width="1515" height="296" key="GridCell.Tab.0.bottom" timestamp="1586511923144">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1071" height="240" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586444046488" />
-    <state width="1071" height="240" key="GridCell.Tab.0.center" timestamp="1586444046488">
+    <state width="1515" height="296" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
+    <state width="1515" height="296" key="GridCell.Tab.0.center" timestamp="1586511923144">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1071" height="240" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586444046488" />
-    <state width="1071" height="240" key="GridCell.Tab.0.left" timestamp="1586444046488">
+    <state width="1515" height="296" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
+    <state width="1515" height="296" key="GridCell.Tab.0.left" timestamp="1586511923144">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1071" height="240" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586444046488" />
-    <state width="1071" height="240" key="GridCell.Tab.0.right" timestamp="1586444046488">
+    <state width="1515" height="296" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
+    <state width="1515" height="296" key="GridCell.Tab.0.right" timestamp="1586511923144">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1071" height="240" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586444046488" />
+    <state width="1515" height="296" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
     <state x="571" y="123" key="RollbackChangesDialog" timestamp="1586262803889">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -154,9 +185,9 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586262656990" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586439444462">
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586444311306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586439444462" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586444311306" />
   </component>
 </project>

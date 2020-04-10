@@ -1,13 +1,20 @@
 import re
+import time
+import json
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet as wn
 from nltk.corpus import stopwords
+from nltk.tokenize import TweetTokenizer
+from nltk import FreqDist
 from config import slang_words, posemoticons, negemoticons, other_emoticons, \
     EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
 
 # hashtag array
 h_dictionary = []
+
+# global dictionary count
+global_dict_count = {}
 
 # 1. remove URL and USERNAME (anonymization)
 def remove_url_and_username(line):
@@ -93,15 +100,31 @@ def pos_tag_convert(tag):
     elif tag.startswith('R'):
         return wn.ADV
     else:
-        return wn.NOUN
+        return None
 
 def lemmatization(lemmatizer, tagged):
     result_lemma = []
     for element, tag in tagged:
-        # print(pos_tag_convert(tag))
-        lemma = lemmatizer.lemmatize(element, pos_tag_convert(tag))
-        result_lemma.append(lemma)
+        pos_tag = pos_tag_convert(tag)
+        if pos_tag is None:
+            result_lemma.append(element)
+        else:
+            # print(pos_tag_convert(tag))
+            lemma = lemmatizer.lemmatize(element, pos_tag)
+            result_lemma.append(lemma)
     return result_lemma
+
+# (get, 10)
+# 12. adding to dictionary
+def adding_to_dictionary(frequency_array):
+    for element in frequency_array:
+        # element[0] = word
+        # element[1] = count
+
+        if element[0] in global_dict_count.keys():
+            global_dict_count[element[0]] = global_dict_count.get(element[0]) + 1
+        else:
+            global_dict_count[element[0]] = element[1]
 
 # filename dataset_sentiment
 dataset_sentiment = "trust";
@@ -110,11 +133,11 @@ dataset_sentiment = "trust";
 myfile = open("twitter_message/dataset_dt_" + dataset_sentiment + "_60k.txt", "rt", encoding='utf-8')
 contents = myfile.read()
 myfile.close()
+t0 = time.time()
 
 for line in contents.splitlines():
     # 1. remove URL and USERNAME
     line = remove_url_and_username(line)
-    # print(line)
 
     # 2. process hash-tag: collect hash-tag(#) (list)
     line = process_h(line)
@@ -129,7 +152,9 @@ for line in contents.splitlines():
     line = line.lower()
 
     # 6. sentence tokenisation
-    tokens = nltk.word_tokenize(line)
+    # tokens = nltk.word_tokenize(line)
+    tknzr = TweetTokenizer()
+    tokens = tknzr.tokenize(line)
 
     # 7. process slang word and acronyms (list)
     tokens = replace_slang(tokens)
@@ -145,9 +170,25 @@ for line in contents.splitlines():
     # 10. stop words elimination
     stop_words = set(stopwords.words('english'))
     filtered_sentence = [word for word in result_lemma if not word in stop_words]
-    print(filtered_sentence)
+    # print(filtered_sentence)
 
     # 11. stem frequency counting (for each word)
-    # fdist = nltk.FreqDist(words_without_stopwords).most_common()
+    frequency_dist = FreqDist(filtered_sentence)
+    frequency_array = frequency_dist.most_common()
+    # print(frequency_array)
+
+    # 12. adding to dictionary
+    adding_to_dictionary(frequency_array)
+
+# timer
+t1 = time.time()
+total = t1-t0
+
+file = open("global_dict_count", "a", encoding='utf-8')
+file.write(json.dumps(global_dict_count))
+file.close()
+print(total)
+
+
 
 

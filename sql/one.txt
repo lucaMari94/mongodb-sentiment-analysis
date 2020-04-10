@@ -1,0 +1,16 @@
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+CREATE TABLE `anger` (
+  `id` int(11) NOT NULL,
+  `word` varchar(255) NOT NULL,
+  `count` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `anger`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `anger`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+COMMIT;
