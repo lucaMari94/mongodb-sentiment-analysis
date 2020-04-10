@@ -191,7 +191,7 @@ def processing(emotion):
     print(total)
 
 # filename dataset_sentiment
-dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"];
+dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
 for emotion in dataset_sentiment:
     processing(emotion)
