@@ -126,69 +126,69 @@ def adding_to_dictionary(frequency_array):
         else:
             global_dict_count[element[0]] = element[1]
 
+def processing(emotion):
+    # read file
+    myfile = open("twitter_message/dataset_dt_" + emotion + "_60k.txt", "rt", encoding='utf-8')
+    contents = myfile.read()
+    myfile.close()
+    t0 = time.time()
+
+    for line in contents.splitlines():
+        # 1. remove URL and USERNAME
+        line = remove_url_and_username(line)
+
+        # 2. process hash-tag: collect hash-tag(#) (list)
+        line = process_h(line)
+
+        # 3. process emoji and emoticons (list)
+        line = process_emoji_and_emoticons(line)
+
+        # 4. treatment punctuation marks and substitution with spaces
+        line = treatment_punctuation(line)
+
+        # 5. transformation to lower case
+        line = line.lower()
+
+        # 6. sentence tokenisation
+        # tokens = nltk.word_tokenize(line)
+        tknzr = TweetTokenizer()
+        tokens = tknzr.tokenize(line)
+
+        # 7. process slang word and acronyms (list)
+        tokens = replace_slang(tokens)
+
+        # 8. POS tagging
+        tagged = nltk.pos_tag(tokens)
+        # print(tagged)
+
+        # 9. lemmatization
+        lemmatizer = WordNetLemmatizer()
+        result_lemma = lemmatization(lemmatizer, tagged)
+
+        # 10. stop words elimination
+        stop_words = set(stopwords.words('english'))
+        filtered_sentence = [word for word in result_lemma if not word in stop_words]
+        # print(filtered_sentence)
+
+        # 11. stem frequency counting (for each word)
+        frequency_dist = FreqDist(filtered_sentence)
+        frequency_array = frequency_dist.most_common()
+        # print(frequency_array)
+
+        # 12. adding to dictionary
+        adding_to_dictionary(frequency_array)
+
+    # timer
+    t1 = time.time()
+    total = t1 - t0
+
+    file = open("result_count/global_dict_count_" + emotion, "a", encoding='utf-8')
+    file.write(json.dumps(global_dict_count))
+    file.close()
+    print(total)
+
 # filename dataset_sentiment
-dataset_sentiment = "trust";
+dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"];
 
-# read file
-myfile = open("twitter_message/dataset_dt_" + dataset_sentiment + "_60k.txt", "rt", encoding='utf-8')
-contents = myfile.read()
-myfile.close()
-t0 = time.time()
-
-for line in contents.splitlines():
-    # 1. remove URL and USERNAME
-    line = remove_url_and_username(line)
-
-    # 2. process hash-tag: collect hash-tag(#) (list)
-    line = process_h(line)
-
-    # 3. process emoji and emoticons (list)
-    line = process_emoji_and_emoticons(line)
-
-    # 4. treatment punctuation marks and substitution with spaces
-    line = treatment_punctuation(line)
-
-    # 5. transformation to lower case
-    line = line.lower()
-
-    # 6. sentence tokenisation
-    # tokens = nltk.word_tokenize(line)
-    tknzr = TweetTokenizer()
-    tokens = tknzr.tokenize(line)
-
-    # 7. process slang word and acronyms (list)
-    tokens = replace_slang(tokens)
-
-    # 8. POS tagging
-    tagged = nltk.pos_tag(tokens)
-    # print(tagged)
-
-    # 9. lemmatization
-    lemmatizer = WordNetLemmatizer()
-    result_lemma = lemmatization(lemmatizer, tagged)
-
-    # 10. stop words elimination
-    stop_words = set(stopwords.words('english'))
-    filtered_sentence = [word for word in result_lemma if not word in stop_words]
-    # print(filtered_sentence)
-
-    # 11. stem frequency counting (for each word)
-    frequency_dist = FreqDist(filtered_sentence)
-    frequency_array = frequency_dist.most_common()
-    # print(frequency_array)
-
-    # 12. adding to dictionary
-    adding_to_dictionary(frequency_array)
-
-# timer
-t1 = time.time()
-total = t1-t0
-
-file = open("global_dict_count", "a", encoding='utf-8')
-file.write(json.dumps(global_dict_count))
-file.close()
-print(total)
-
-
-
-
+for emotion in dataset_sentiment:
+    processing(emotion)
