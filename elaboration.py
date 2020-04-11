@@ -10,9 +10,6 @@ from nltk import FreqDist
 from config import slang_words, posemoticons, negemoticons, other_emoticons, \
     EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
 
-
-
-
 # hashtag array
 h_dictionary = []
 
@@ -185,8 +182,12 @@ def processing(emotion):
     t1 = time.time()
     total = t1 - t0
 
-    file = open("result_count/global_dict_count_" + emotion, "a", encoding='utf-8')
-    file.write(json.dumps(global_dict_count))
+    # file = open("result_count/global_dict_count_" + emotion, "a", encoding='utf-8')
+    # file.write(json.dumps(global_dict_count))
+    # file.close()
+
+    file = open("result_count/hashtag_" + emotion, "a", encoding='utf-8')
+    file.write(json.dumps(h_dictionary))
     file.close()
     print(total)
 
