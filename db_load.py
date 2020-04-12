@@ -4,9 +4,9 @@ import ast
 # read from file
 def load_emotion_from_dict(emotion):
     myfile = open("result_count/" + emotion + "global_dict_count.txt", "rt", encoding='utf-8')
-    dict = myfile.read()
+    string_dict = myfile.read()
     myfile.close()
-    return dict
+    return string_dict
 
 def connect_to_db():
     try:
