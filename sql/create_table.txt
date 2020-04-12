@@ -1,0 +1,218 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Creato il: Apr 12, 2020 alle 10:31
+-- Versione del server: 10.1.38-MariaDB
+-- Versione PHP: 7.1.27
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `emotion`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `anger`
+--
+
+CREATE TABLE `anger` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `anticipation`
+--
+
+CREATE TABLE `anticipation` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `disgust`
+--
+
+CREATE TABLE `disgust` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `fear`
+--
+
+CREATE TABLE `fear` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `joy`
+--
+
+CREATE TABLE `joy` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `sadness`
+--
+
+CREATE TABLE `sadness` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `surprise`
+--
+
+CREATE TABLE `surprise` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `trust`
+--
+
+CREATE TABLE `trust` (
+  `id` int(11) NOT NULL,
+  `word` varchar(99) CHARACTER SET utf8 NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indici per le tabelle scaricate
+--
+
+--
+-- Indici per le tabelle `anger`
+--
+ALTER TABLE `anger`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `anticipation`
+--
+ALTER TABLE `anticipation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `disgust`
+--
+ALTER TABLE `disgust`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `fear`
+--
+ALTER TABLE `fear`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `joy`
+--
+ALTER TABLE `joy`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `sadness`
+--
+ALTER TABLE `sadness`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `surprise`
+--
+ALTER TABLE `surprise`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `trust`
+--
+ALTER TABLE `trust`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `anger`
+--
+ALTER TABLE `anger`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188413;
+
+--
+-- AUTO_INCREMENT per la tabella `anticipation`
+--
+ALTER TABLE `anticipation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203550;
+
+--
+-- AUTO_INCREMENT per la tabella `disgust`
+--
+ALTER TABLE `disgust`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49663;
+
+--
+-- AUTO_INCREMENT per la tabella `fear`
+--
+ALTER TABLE `fear`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56599;
+
+--
+-- AUTO_INCREMENT per la tabella `joy`
+--
+ALTER TABLE `joy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71452;
+
+--
+-- AUTO_INCREMENT per la tabella `sadness`
+--
+ALTER TABLE `sadness`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79951;
+
+--
+-- AUTO_INCREMENT per la tabella `surprise`
+--
+ALTER TABLE `surprise`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90668;
+
+--
+-- AUTO_INCREMENT per la tabella `trust`
+--
+ALTER TABLE `trust`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98749;
+COMMIT;

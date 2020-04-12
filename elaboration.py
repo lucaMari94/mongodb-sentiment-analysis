@@ -10,12 +10,6 @@ from nltk import FreqDist
 from config import slang_words, posemoticons, negemoticons, other_emoticons, \
     EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
 
-# hashtag array
-h_dictionary = []
-
-# global dictionary count
-global_dict_count = {}
-
 # 1. remove URL and USERNAME (anonymization)
 def remove_url_and_username(line):
     line = line.replace('URL', '')
@@ -23,11 +17,10 @@ def remove_url_and_username(line):
     return line
 
 # 2. process hash-tag: collect hash-tag(#) (list)
-def process_h(line):
-    pat = re.compile(r"#(\w+)")
-
+def process_h(line, h_dictionary):
     # hashtag array [string, ...]
-    h_array = pat.findall(line)
+    h_array = re.findall(r"#(\w+)", line)
+
     for element in h_array:
         h_dictionary.append(element)
         line = line.replace('#'+element, '')
@@ -114,9 +107,8 @@ def lemmatization(lemmatizer, tagged):
             result_lemma.append(lemma)
     return result_lemma
 
-# (get, 10)
 # 12. adding to dictionary
-def adding_to_dictionary(frequency_array):
+def adding_to_dictionary(frequency_array, global_dict_count):
     for element in frequency_array:
         # element[0] = word
         # element[1] = count
@@ -126,7 +118,8 @@ def adding_to_dictionary(frequency_array):
         else:
             global_dict_count[element[0]] = element[1]
 
-def processing(emotion):
+def processing(emotion, global_dict_count, h_dictionary):
+
     # read file
     myfile = open("twitter_message/dataset_dt_" + emotion + "_60k.txt", "rt", encoding='utf-8')
     contents = myfile.read()
@@ -138,7 +131,7 @@ def processing(emotion):
         line = remove_url_and_username(line)
 
         # 2. process hash-tag: collect hash-tag(#) (list)
-        line = process_h(line)
+        line = process_h(line, h_dictionary)
 
         # 3. process emoji and emoticons (list)
         line = process_emoji_and_emoticons(line)
@@ -176,17 +169,17 @@ def processing(emotion):
         # print(frequency_array)
 
         # 12. adding to dictionary
-        adding_to_dictionary(frequency_array)
+        adding_to_dictionary(frequency_array, global_dict_count)
 
     # timer
     t1 = time.time()
     total = t1 - t0
 
-    # file = open("result_count/global_dict_count_" + emotion, "a", encoding='utf-8')
-    # file.write(json.dumps(global_dict_count))
-    # file.close()
+    file = open("result_count/" + emotion + "_global_dict_count.txt", "a", encoding='utf-8')
+    file.write(json.dumps(global_dict_count))
+    file.close()
 
-    file = open("result_count/hashtag_" + emotion, "a", encoding='utf-8')
+    file = open("result_count/" + emotion + "_hashtag.txt", "a", encoding='utf-8')
     file.write(json.dumps(h_dictionary))
     file.close()
     print(total)
@@ -195,4 +188,10 @@ def processing(emotion):
 dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
 for emotion in dataset_sentiment:
-    processing(emotion)
+    # hashtag array
+    h_dictionary = []
+
+    # global dictionary count
+    global_dict_count = {}
+    global_dict_count.clear()
+    processing(emotion, global_dict_count, h_dictionary)

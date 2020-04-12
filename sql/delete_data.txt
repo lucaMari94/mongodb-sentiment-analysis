@@ -1,0 +1,8 @@
+delete from anger where id is not null;
+delete from anticipation where id is not null;
+delete from disgust where id is not null;
+delete from fear where id is not null;
+delete from joy where id is not null;
+delete from sadness where id is not null;
+delete from surprise where id is not null;
+delete from trust where id is not null;

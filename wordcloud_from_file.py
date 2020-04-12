@@ -6,55 +6,51 @@ import matplotlib.pyplot as plt
 
 # read from file
 def load_emotion_from_dict(emotion):
-    myfile = open("result_count/global_dict_count_" + emotion, "rt", encoding='utf-8')
+    myfile = open("result_count/" + emotion + "_global_dict_count.txt", "rt", encoding='utf-8')
     dict = myfile.read()
     myfile.close()
     return dict
 
 def load_emotion_from_hashtag(emotion):
-    myfile = open("result_count/hashtag_" + emotion, "rt", encoding='utf-8')
+    myfile = open("result_count/" + emotion + "_hashtag.txt", "rt", encoding='utf-8')
     dict = myfile.read()
     myfile.close()
     return dict
 
-def create_wordcloud(emotion, flag):
-
-    # read from file
-    if flag:
-        # Generate a wordcloud from dict
-        string_dict = load_emotion_from_dict(emotion)
-        # trasform string to dictionary
-        dict = ast.literal_eval(string_dict)
-
-    else:
-        string_dict = load_emotion_from_dict(emotion)
-
-    # wordcloud
-    twitter_mask = np.array(Image.open("img/twitter.jpg"))
-
-    # Create a word cloud image
-    wc = WordCloud(stopwords=STOPWORDS, background_color="white", max_words=500, mask=twitter_mask, contour_width=1)
-
-    if flag:
-        # Generate a wordcloud from dict
-        wc.generate_from_frequencies(dict)
-        wc.to_file("img/twitter_" + emotion + ".jpg")
-    else:
-        wc.generate(string_dict)
-        wc.to_file("img/twitter_hashtag_" + emotion + ".jpg")
-
-    # store to file
-
-    # show
-    # plt.figure(figsize=[20, 10])
-    # plt.imshow(wc)
-    # plt.axis("off")
-    # plt.show()
-
 dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
+# dictionary
 for emotion in dataset_sentiment:
-    create_wordcloud(emotion, True)
 
+     string_dict = load_emotion_from_dict(emotion)
+     dict = ast.literal_eval(string_dict)
+
+     twitter_mask = np.array(Image.open("img/twitter.jpg"))
+
+     wc = WordCloud(width=512, height=512, background_color='white', stopwords=STOPWORDS, mask=twitter_mask)
+     wc.generate_from_frequencies(dict)
+
+     wc.to_file("img/" + emotion + "_dict_wordcloud.jpg")
+
+     """plt.figure(figsize=(10, 8), facecolor='white', edgecolor='blue')
+    plt.imshow(wc)
+    plt.axis('off')
+    plt.tight_layout(pad=0)
+    plt.show()"""
+
+# hashtag
 for emotion in dataset_sentiment:
-    create_wordcloud(emotion, False)
+    hashtag = load_emotion_from_hashtag(emotion)
+
+    twitter_mask = np.array(Image.open("img/twitter.jpg"))
+
+    wc = WordCloud(width=512, height=512, background_color='white', stopwords=STOPWORDS, mask=twitter_mask)
+    wc.generate(hashtag)
+
+    wc.to_file("img/" + emotion + "_hashtag_wordcloud.jpg")
+
+    """plt.figure(figsize=(10, 8), facecolor='white', edgecolor='blue')
+    plt.imshow(wc)
+    plt.axis('off')
+    plt.tight_layout(pad=0)
+    plt.show()"""

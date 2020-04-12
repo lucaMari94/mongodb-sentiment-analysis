@@ -3,7 +3,7 @@ import ast
 
 # read from file
 def load_emotion_from_dict(emotion):
-    myfile = open("result_count/global_dict_count_" + emotion, "rt", encoding='utf-8')
+    myfile = open("result_count/" + emotion + "global_dict_count.txt", "rt", encoding='utf-8')
     dict = myfile.read()
     myfile.close()
     return dict
@@ -34,10 +34,17 @@ db = connect_to_db()
 
 dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
+dict = {}
+
 for emotion in dataset_sentiment:
+    string_dict = ""
+    dict.clear()
+
     string_dict = load_emotion_from_dict(emotion)
+
     # trasform string to dictionary
     dict = ast.literal_eval(string_dict)
+
     for element in dict:
         # print(element)
         # print(dict[element])
