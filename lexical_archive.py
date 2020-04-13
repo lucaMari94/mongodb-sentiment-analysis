@@ -83,19 +83,19 @@ for element in anger_emosn_dict_perc:
 
 for element in anger_nrc_dict_perc:
     word = element
-    count = anger_emosn_dict_perc.get(element)
+    count = anger_nrc_dict_perc.get(element)
     attribute_name = "nrc"
     table_name = "anger_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
 for element in anger_sentisense_dict_perc:
     word = element
-    count = anger_emosn_dict_perc.get(element)
+    count = anger_sentisense_dict_perc.get(element)
     attribute_name = "sentisense"
     table_name = "anger_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
-
+"""
 # anticipation
 
 anticipation_nrc_dict_perc = create_dict_perc("Anticipation","anticipation","NRC_anticipation")
@@ -116,7 +116,7 @@ for element in anticipation_sentisense_dict_perc:
     table_name = "anticipation_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
-#ConScore
+# ConScore
 
 # disgust-hate
 
@@ -236,3 +236,4 @@ for element in trust_nrc_dict_perc:
     attribute_name = "nrc"
     table_name = "trust_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
+"""
