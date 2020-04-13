@@ -14,13 +14,35 @@ def connect_to_db():
     except mysql.connector.Error as e:
         print(e)
 
+def word_exist(db, table_name, word):
+    try:
+        mycursor = db.cursor()
+        # SELECT * FROM `anger_percentage` WHERE word = "stir"
+        query = 'SELECT * FROM `' + table_name + '` WHERE word = "' + word + '"'
+        mycursor.execute(query)
+        results = mycursor.fetchone()
+        if results == None:
+            return False
+        else:
+            return True
+
+    except mysql.connector.Error as e:
+        print(e)
+
 def insert_into_db(db, table_name, attribute_name, word, count):
     try:
         mycursor = db.cursor()
-        sql = "INSERT INTO " + table_name + " (word, " + attribute_name + ") VALUES (%s, %s)"
-        val = (word, count)
-        mycursor.execute(sql, val)
-        db.commit()
+
+        if word_exist(db, table_name, word):
+            sql_update_query = "Update " + table_name + " set " + attribute_name + " = %s where word = %s"
+            data = (count, word)
+            mycursor.execute(sql_update_query, data)
+            db.commit()
+        else:
+            sql = "INSERT INTO " + table_name + " (word, " + attribute_name + ") VALUES (%s, %s)"
+            val = (word, count)
+            mycursor.execute(sql, val)
+            db.commit()
     except mysql.connector.Error as e:
         print(e)
 
@@ -95,12 +117,10 @@ for element in anger_sentisense_dict_perc:
     table_name = "anger_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
-"""
 # anticipation
 
 anticipation_nrc_dict_perc = create_dict_perc("Anticipation","anticipation","NRC_anticipation")
 anticipation_sentisense_dict_perc = create_dict_perc("Anticipation","anticipation","sentisense_anticipation")
-
 
 for element in anticipation_nrc_dict_perc:
     word = element
@@ -125,7 +145,6 @@ for element in anticipation_sentisense_dict_perc:
 fear_nrc_dict_perc = create_dict_perc("Fear","fear","NRC_fear")
 fear_sentisense_dict_perc = create_dict_perc("Fear","fear","sentisense_fear")
 
-
 for element in fear_nrc_dict_perc:
     word = element
     count = fear_nrc_dict_perc.get(element)
@@ -140,7 +159,6 @@ for element in fear_sentisense_dict_perc:
     table_name = "fear_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
-
 # hope
 
 hope_sentisense_dict_perc = create_dict_perc("Hope","hope","sentisense_hope")
@@ -151,7 +169,6 @@ for element in hope_sentisense_dict_perc:
     attribute_name = "sentisense"
     table_name = "hope_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
-
 
 # joy
 joy_emosn_dict_perc = create_dict_perc("Joy","joy","EmoSN_joy")
@@ -179,16 +196,14 @@ for element in joy_sentisense_dict_perc:
     table_name = "joy_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
-
-#like-love
-#neg
-#pos
+# like-love
+# neg
+# pos
 
 # sadness
 
 sadness_nrc_dict_perc = create_dict_perc("Sadness","sadness","NRC_sadness")
 sadness_sentisense_dict_perc = create_dict_perc("Sadness","sadness","sentisense_sadness")
-
 
 for element in sadness_nrc_dict_perc:
     word = element
@@ -204,12 +219,10 @@ for element in sadness_sentisense_dict_perc:
     table_name = "sadness_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
-
 # suprise
 
 surprise_nrc_dict_perc = create_dict_perc("Suprise","suprise","NRC_suprise")
 surprise_sentisense_dict_perc = create_dict_perc("Suprise","suprise","sentisense_suprise")
-
 
 for element in surprise_nrc_dict_perc:
     word = element
@@ -225,7 +238,6 @@ for element in surprise_sentisense_dict_perc:
     table_name = "suprise_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
 
-
 # trust
 
 trust_nrc_dict_perc = create_dict_perc("Trust","trust","NRC_trust")
@@ -236,4 +248,4 @@ for element in trust_nrc_dict_perc:
     attribute_name = "nrc"
     table_name = "trust_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
-"""
+
