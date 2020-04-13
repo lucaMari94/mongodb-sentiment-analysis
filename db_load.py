@@ -3,7 +3,7 @@ import ast
 
 # read from file
 def load_emotion_from_dict(emotion):
-    myfile = open("result_count/" + emotion + "global_dict_count.txt", "rt", encoding='utf-8')
+    myfile = open("result_count/" + emotion + "_global_dict_count.txt", "rt", encoding='utf-8')
     string_dict = myfile.read()
     myfile.close()
     return string_dict
