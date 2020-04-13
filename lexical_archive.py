@@ -248,4 +248,3 @@ for element in trust_nrc_dict_perc:
     attribute_name = "nrc"
     table_name = "trust_percentage"
     insert_into_db(db, table_name, attribute_name, word, count)
-
