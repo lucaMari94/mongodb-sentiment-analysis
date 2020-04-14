@@ -27,6 +27,7 @@ for emotion in dataset_sentiment:
 
      twitter_mask = np.array(Image.open("img/twitter.jpg"))
 
+    # max_width = 50
      wc = WordCloud(width=512, height=512, background_color='white', stopwords=STOPWORDS, mask=twitter_mask)
      wc.generate_from_frequencies(dict)
 

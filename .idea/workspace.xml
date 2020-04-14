@@ -1,10 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bcf6d855-1851-45d0-a98a-91ff298407fa" name="Default Changelist" comment="">
+    <list default="true" id="bcf6d855-1851-45d0-a98a-91ff298407fa" name="Default Changelist" comment="prova">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elaboration.py" beforeDir="false" afterPath="$PROJECT_DIR$/elaboration.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twitter_message/dataset_dt_trust_60k.txt" beforeDir="false" afterPath="$PROJECT_DIR$/twitter_message/dataset_dt_trust_60k.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/anger_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/anger_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/anger_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/anger_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/anticipation_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/anticipation_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/anticipation_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/anticipation_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/disgust_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/disgust_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/disgust_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/disgust_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/fear_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/fear_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/fear_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/fear_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/joy_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/joy_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/joy_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/joy_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/sadness_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/sadness_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/sadness_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/sadness_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/surprise_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/surprise_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/surprise_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/surprise_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/trust_dict_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/trust_dict_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/trust_hashtag_wordcloud.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/img/trust_hashtag_wordcloud.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/anger_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/anger_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/anticipation_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/anticipation_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/disgust_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/disgust_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/fear_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/fear_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/joy_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/joy_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/sadness_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/sadness_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/surprise_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/surprise_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/trust_global_dict_count.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result_count/trust_hashtag.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wordcloud_from_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/wordcloud_from_file.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +60,41 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/result_count" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\luca\Desktop\MAADB\maadb\test" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\luca\Desktop\MAADB\maadb\result_count" />
+      <recent name="C:\Users\luca\Desktop\MAADB\maadb\img" />
       <recent name="C:\Users\luca\Desktop\MAADB\maadb" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.elaboration">
+  <component name="RunManager" selected="Python.wordcloud_from_file">
+    <configuration name="connection_mongo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="maadb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\luca\Desktop\MAADB\maadb\test\connection_mongo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="elaboration" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="maadb" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -59,7 +116,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="lexical_archive" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="maadb" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -67,11 +124,53 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test/test2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lexical_archive.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lexical_resources" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="maadb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lexical_resources.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="wordcloud_from_file" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="maadb" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/wordcloud_from_file.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -82,8 +181,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.wordcloud_from_file" />
+        <item itemvalue="Python.lexical_archive" />
         <item itemvalue="Python.elaboration" />
-        <item itemvalue="Python.test2" />
+        <item itemvalue="Python.connection_mongo" />
+        <item itemvalue="Python.lexical_resources" />
       </list>
     </recent_temporary>
   </component>
@@ -140,7 +242,84 @@
       <option name="project" value="LOCAL" />
       <updated>1586444289619</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="step 11-12">
+      <created>1586512174811</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1586512174811</updated>
+    </task>
+    <task id="LOCAL-00008" summary="prova">
+      <created>1586514906858</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1586514906858</updated>
+    </task>
+    <task id="LOCAL-00009" summary="hashtag create">
+      <created>1586610424144</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1586610424144</updated>
+    </task>
+    <task id="LOCAL-00010" summary="wordcloud and db">
+      <created>1586618581621</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1586618581621</updated>
+    </task>
+    <task id="LOCAL-00011" summary="db+ì + wordcloud">
+      <created>1586690378490</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1586690378490</updated>
+    </task>
+    <task id="LOCAL-00012" summary="wip">
+      <created>1586713503711</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1586713503711</updated>
+    </task>
+    <task id="LOCAL-00013" summary="db percentage">
+      <created>1586775237223</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1586775237223</updated>
+    </task>
+    <task id="LOCAL-00014" summary="lexical archive modify">
+      <created>1586788642117</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1586788642117</updated>
+    </task>
+    <task id="LOCAL-00015" summary="mongo db try">
+      <created>1586790547028</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1586790547028</updated>
+    </task>
+    <task id="LOCAL-00016" summary="wordcloud">
+      <created>1586801859208</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1586801859208</updated>
+    </task>
+    <task id="LOCAL-00017" summary="img">
+      <created>1586856606146</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1586856606146</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -150,44 +329,87 @@
     <MESSAGE value="add import from config" />
     <MESSAGE value="do 4 point" />
     <MESSAGE value="step 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="step 1" />
+    <MESSAGE value="step 11-12" />
+    <MESSAGE value="prova" />
+    <MESSAGE value="hashtag create" />
+    <MESSAGE value="wordcloud and db" />
+    <MESSAGE value="db+ì + wordcloud" />
+    <MESSAGE value="wip" />
+    <MESSAGE value="db percentage" />
+    <MESSAGE value="lexical archive modify" />
+    <MESSAGE value="mongo db try" />
+    <MESSAGE value="wordcloud" />
+    <MESSAGE value="img" />
+    <option name="LAST_COMMIT_MESSAGE" value="img" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1586444288922">
+    <state x="520" y="215" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586680281664">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586444288922" />
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1586262849990">
+    <state x="520" y="215" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1586680281664" />
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1586856605216">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586262849990" />
-    <state width="1515" height="296" key="GridCell.Tab.0.bottom" timestamp="1586511923144">
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586856605216" />
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog" timestamp="1586514878407">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="296" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
-    <state width="1515" height="296" key="GridCell.Tab.0.center" timestamp="1586511923144">
+    <state x="93" y="93" width="1350" height="638" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1586514878407" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1586593286474">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="296" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
-    <state width="1515" height="296" key="GridCell.Tab.0.left" timestamp="1586511923144">
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586593286474" />
+    <state width="1515" height="156" key="GridCell.Tab.0.bottom" timestamp="1586868786590">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="296" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
-    <state width="1515" height="296" key="GridCell.Tab.0.right" timestamp="1586511923144">
+    <state width="1515" height="156" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586868786590" />
+    <state width="1515" height="156" key="GridCell.Tab.0.center" timestamp="1586868786589">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="296" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586511923144" />
+    <state width="1515" height="156" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586868786589" />
+    <state width="1515" height="156" key="GridCell.Tab.0.left" timestamp="1586868786589">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="156" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586868786589" />
+    <state width="1515" height="156" key="GridCell.Tab.0.right" timestamp="1586868786589">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="156" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586868786589" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1586690765644">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586690765644" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1586690765644">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586690765644" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1586690765644">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586690765644" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1586690765644">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586690765644" />
     <state x="571" y="123" key="RollbackChangesDialog" timestamp="1586262803889">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="571" y="123" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1586262803889" />
-    <state x="277" y="55" key="SettingsEditor" timestamp="1586262656990">
+    <state x="163" y="61" key="SettingsEditor" timestamp="1586789466770">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="55" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586262656990" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586444311306">
+    <state x="163" y="61" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586789466770" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1586856611937">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586444311306" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586856611937" />
+    <state x="567" y="102" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586856462387">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="567" y="102" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1586856462387" />
+    <state x="498" y="204" key="git4idea.merge.GitPullDialog" timestamp="1586781196103">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="204" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1586781196103" />
   </component>
 </project>
