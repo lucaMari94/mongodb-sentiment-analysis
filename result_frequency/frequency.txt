@@ -1,0 +1,8 @@
+anger: 5.53
+anticipation: 8.67
+disgust: 9.26
+fear: 4.20
+joy: 35.02
+sadness: 6.65
+surprise: 2.72
+trust: 6.36
