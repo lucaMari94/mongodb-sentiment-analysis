@@ -52,6 +52,7 @@ file = open("result_frequency/frequency.txt", "a", encoding='utf-8')
 
 for emotion in arr_emotions:
     perc_count = perc_lexical_into_twitter_msg(emotion)
-    file.write(json.dumps(perc_count))
+    text = emotion+": "+perc_count+"\n"
+    file.write(text)
 
 file.close()
