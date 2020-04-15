@@ -65,4 +65,6 @@ update_db(anger_nrc, 'anger', 'nrc', 'anger_global_dict_count')
 anger_sentisense = get_lexical_archive("Anger", "sentisense_anger")
 update_db(anger_sentisense, 'anger', 'sentisense', 'anger_global_dict_count')
 
+
 dict_twit = get_result_count_dict("anger_global_dict_count")
+
