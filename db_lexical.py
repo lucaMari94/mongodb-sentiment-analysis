@@ -2,6 +2,7 @@ import ast
 import re
 import mysql.connector
 
+
 def connect_to_db():
     try:
         db = mysql.connector.connect(
@@ -67,6 +68,7 @@ def update_db(words, table_name, attributename, result_count_dict):
             except mysql.connector.Error as e:
                 print(e)
 
+
 def update_db_con_score(dict, table_name, attributename, result_count_dict):
     # read file dictionary
     dict_twit = get_result_count_dict(result_count_dict)
@@ -83,54 +85,58 @@ def update_db_con_score(dict, table_name, attributename, result_count_dict):
                 db.commit()
             except mysql.connector.Error as e:
                 print(e)
+
+
+def get_count_word_total():
+    db = connect_to_db()
+    try:
+        mycursor = db.cursor()
+        query = "SELECT SUM(frequency) from anger where (emo_sn = 1 or nrc = 1 or sentisense = 1)"
+        mycursor.execute(query)
+        return mycursor.fetchone()[0]
+    except mysql.connector.Error as e:
+        print(e)
+
+"""
 # anger
 # emosn, nrc, sentisense
+dict_attribute_boolean = {"EmoSN_anger.txt" : 'emo_sn',
+    "NRC_anger.txt" : 'nrc',
+    "sentisense_anger.txt" : 'sentisense'}
 
+for element in dict_attribute_boolean:
+    dict_lexical_archive = {}
+    dict_lexical_archive.clear()
+    dict_lexical_archive = get_lexical_archive("Anger", element)
+    update_db(dict_lexical_archive, 'anger', dict_attribute_boolean.get(element), 'anger_global_dict_count')
+
+
+# con score
+# key = filename, value = attributename
+dict_file = {"afinn.txt" : "afinn",
+    "anewAro_tab.tsv" : "anew_aro",
+    "anewDom_tab.tsv" : "anew_dom",
+    "anewPleas_tab.tsv" : "anew_pleas",
+    "Dal_Activ.csv" : "dal_activ",
+    "Dal_imag.csv" : "dal_imag",
+    "Dal_Pleas.csv" : "dal_pleas"}
+
+for element in dict_file:
+    dict = {}
+    dict.clear()
+    dict_con_score = {}
+    dict_con_score.clear()
+    dict = get_lexical_archive("ConScore", element)
+    dict_con_score = get_lexical_archive_con_score(dict)
+    update_db_con_score(dict_con_score, "anger", dict_file.get(element), "anger_global_dict_count")
 """
-anger_emosn = get_lexical_archive("Anger", "EmoSN_anger.txt")
-update_db(anger_emosn, 'anger', 'emo_sn', 'anger_global_dict_count')
 
-anger_nrc = get_lexical_archive("Anger", "NRC_anger.txt")
-update_db(anger_nrc, 'anger', 'nrc', 'anger_global_dict_count')
+count_total_anger = get_count_word_total()
+print(count_total_anger)
 
-anger_sentisense = get_lexical_archive("Anger", "sentisense_anger.txt")
-update_db(anger_sentisense, 'anger', 'sentisense', 'anger_global_dict_count')
+anger_global_dict_count = get_result_count_dict('anger_global_dict_count')
+total_word_dict_twit = sum(anger_global_dict_count.values())
+print(total_word_dict_twit)
 
-
-dict_twit = get_result_count_dict("anger_global_dict_count")
-"""
-
-list_file= ["afinn.txt","anewAro_tab.tsv","anewDom_tab.tsv",
-            "anewPleas_tab.tsv","Dal_Activ.csv","Dal_imag.csv",
-            "Dal_Pleas.csv"]
-
-
-anger_afinn = get_lexical_archive("ConScore", "afinn.txt")
-dict_afinn = get_lexical_archive_con_score(anger_afinn)
-update_db_con_score(dict_afinn,"anger","afinn","anger_global_dict_count")
-
-
-anger_anew_aro = get_lexical_archive("ConScore", "anewAro_tab.tsv")
-dict_anew_aro = get_lexical_archive_con_score(anger_anew_aro)
-update_db_con_score(dict_anew_aro,"anger","anew_aro","anger_global_dict_count")
-
-anger_anew_dom = get_lexical_archive("ConScore", "anewDom_tab.tsv")
-dict_anew_dom = get_lexical_archive_con_score(anger_anew_dom)
-update_db_con_score(dict_anew_dom,"anger","anew_dom","anger_global_dict_count")
-
-anger_anew_pleas = get_lexical_archive("ConScore", "anewPleas_tab.tsv")
-dict_anew_pleas = get_lexical_archive_con_score(anger_anew_pleas)
-update_db_con_score(dict_anew_pleas,"anger","anew_pleas","anger_global_dict_count")
-
-anger_dal_active = get_lexical_archive("ConScore", "Dal_Activ.csv")
-dict_dal_active = get_lexical_archive_con_score(anger_dal_active)
-update_db_con_score(dict_dal_active,"anger","dal_activ","anger_global_dict_count")
-
-anger_dal_imag = get_lexical_archive("ConScore", "Dal_imag.csv")
-dict_dal_imag = get_lexical_archive_con_score(anger_dal_imag)
-update_db_con_score(dict_dal_imag,"anger","dal_imag","anger_global_dict_count")
-
-anger_dal_pleas = get_lexical_archive("ConScore", "Dal_Pleas.csv")
-dict_dal_pleas = get_lexical_archive_con_score(anger_dal_pleas)
-update_db_con_score(dict_dal_pleas,"anger","dal_pleas","anger_global_dict_count")
-
+perc_anger = count_total_anger / total_word_dict_twit * 100
+print(perc_anger)
