@@ -87,17 +87,6 @@ def update_db_con_score(dict, table_name, attributename, result_count_dict):
                 print(e)
 
 
-def get_count_word_total():
-    db = connect_to_db()
-    try:
-        mycursor = db.cursor()
-        query = "SELECT SUM(frequency) from anger where (emo_sn = 1 or nrc = 1 or sentisense = 1)"
-        mycursor.execute(query)
-        return mycursor.fetchone()[0]
-    except mysql.connector.Error as e:
-        print(e)
-
-"""
 # anger
 # emosn, nrc, sentisense
 dict_attribute_boolean = {"EmoSN_anger.txt" : 'emo_sn',
@@ -129,14 +118,3 @@ for element in dict_file:
     dict = get_lexical_archive("ConScore", element)
     dict_con_score = get_lexical_archive_con_score(dict)
     update_db_con_score(dict_con_score, "anger", dict_file.get(element), "anger_global_dict_count")
-"""
-
-count_total_anger = get_count_word_total()
-print(count_total_anger)
-
-anger_global_dict_count = get_result_count_dict('anger_global_dict_count')
-total_word_dict_twit = sum(anger_global_dict_count.values())
-print(total_word_dict_twit)
-
-perc_anger = count_total_anger / total_word_dict_twit * 100
-print(perc_anger)
