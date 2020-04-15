@@ -29,12 +29,15 @@ def get_lexical_archive(foldername, filename):
             words.append(word)
     return words
 
-def update_db(words, table_name, attributename, result_count_dict):
-    # read file dictionary
+def get_result_count_dict(result_count_dict):
     myfile = open("result_count/"+ result_count_dict +".txt", "rt", encoding='utf-8')
     contents_twit = myfile.read()
     myfile.close()
-    dict_twit = ast.literal_eval(contents_twit)
+    return ast.literal_eval(contents_twit)
+
+def update_db(words, table_name, attributename, result_count_dict):
+    # read file dictionary
+    dict_twit = get_result_count_dict(result_count_dict)
 
     db = connect_to_db()
 
@@ -61,3 +64,5 @@ update_db(anger_nrc, 'anger', 'nrc', 'anger_global_dict_count')
 
 anger_sentisense = get_lexical_archive("Anger", "sentisense_anger")
 update_db(anger_sentisense, 'anger', 'sentisense', 'anger_global_dict_count')
+
+dict_twit = get_result_count_dict("anger_global_dict_count")
