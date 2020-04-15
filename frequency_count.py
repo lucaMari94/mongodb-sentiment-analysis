@@ -1,3 +1,5 @@
+import json
+
 import mysql.connector
 import ast
 
@@ -22,27 +24,34 @@ def get_result_count_dict(result_count_dict):
     return ast.literal_eval(contents_twit)
 
 
-def get_count_word_total():
+def get_count_word_total(table_name):
     db = connect_to_db()
     try:
         mycursor = db.cursor()
-        query = "SELECT SUM(frequency) from anger where (emo_sn = 1 or nrc = 1 or sentisense = 1)"
+        query = "SELECT SUM(frequency) from "+table_name+" where (emo_sn = 1 or nrc = 1 or sentisense = 1)"
         mycursor.execute(query)
         return mycursor.fetchone()[0]
     except mysql.connector.Error as e:
         print(e)
 
 
-count_total_anger = get_count_word_total()
-print(count_total_anger)
+def perc_lexical_into_twitter_msg(emotion):
 
-anger_global_dict_count = get_result_count_dict('anger_global_dict_count')
-total_word_dict_twit = sum(anger_global_dict_count.values())
-print(total_word_dict_twit)
+    count_total_emotion = get_count_word_total(emotion)
 
-perc_anger = count_total_anger / total_word_dict_twit * 100
-print(f"{perc_anger:.2f}")
+    emotion_global_dict_count = get_result_count_dict(emotion+'_global_dict_count')
+    total_word_dict_twit = sum(emotion_global_dict_count.values())
 
-# file = open("result_frequency/frequency.txt", "a", encoding='utf-8')
-# file.write(json.dumps(global_dict_count))
-# file.close()
+    perc_emotion = count_total_emotion/ total_word_dict_twit * 100
+
+    return f"{perc_emotion:.2f}"
+
+arr_emotions = ["anger","anticipation","disgust","fear","joy","sadness","surprise","trust"]
+
+file = open("result_frequency/frequency.txt", "a", encoding='utf-8')
+
+for emotion in arr_emotions:
+    perc_count = perc_lexical_into_twitter_msg(emotion)
+    file.write(json.dumps(perc_count))
+
+file.close()
