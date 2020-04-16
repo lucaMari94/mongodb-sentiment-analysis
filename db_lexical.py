@@ -97,7 +97,7 @@ global_con_score = {"afinn.txt" : "afinn",
     "Dal_Pleas.csv" : "dal_pleas"}
 
 
-
+"""
 # anger
 
 dict_attribute_boolean = {"EmoSN_anger.txt" : 'emo_sn',
@@ -254,11 +254,11 @@ for element in global_con_score:
     dict = get_lexical_archive("ConScore", element)
     dict_con_score = get_lexical_archive_con_score(dict)
     update_db_con_score(dict_con_score, "sadness", global_con_score.get(element), "sadness_global_dict_count")
-
+"""
 
 # Surprise
 
-dict_attribute_boolean.clear()
+# dict_attribute_boolean.clear()
 
 dict_attribute_boolean = {"NRC_surprise.txt": 'nrc',
                           "sentisense_surprise.txt": 'sentisense'}

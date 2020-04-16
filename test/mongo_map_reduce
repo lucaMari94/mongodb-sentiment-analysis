@@ -1,0 +1,118 @@
+from pymongo import MongoClient
+from bson.code import Code
+
+# client
+client = MongoClient('localhost', 27017)
+
+# access to db
+db = client.prova
+
+# access to table/collection
+collection = db.orders
+'''
+data = [
+    {"_id": 1, "cust_id": "Ant O. Knee", "ord_date": "2020-03-01", "price": 25,
+     "items": [ { "sku": "oranges", "qty": 5, "price": 2.5 },
+                { "sku": "apples", "qty": 5, "price": 2.5 } ],
+     "status": "A" },
+
+    {"_id": 2, "cust_id": "Ant O. Knee", "ord_date": "2020-03-08", "price": 70,
+     "items": [ { "sku": "oranges", "qty": 8, "price": 2.5 },
+                { "sku": "chocolates", "qty": 5, "price": 10 } ],
+     "status": "A" },
+
+    {"_id": 3, "cust_id": "Busby Bee", "ord_date": "2020-03-08", "price": 50,
+     "items": [ { "sku": "oranges", "qty": 10, "price": 2.5 },
+                { "sku": "pears", "qty": 10, "price": 2.5 } ],
+     "status": "A" },
+
+    {"_id": 4, "cust_id": "Busby Bee", "ord_date": "2020-03-18", "price": 25,
+     "items": [ { "sku": "oranges", "qty": 10, "price": 2.5 } ],
+     "status": "A" },
+
+    {"_id": 5, "cust_id": "Busby Bee", "ord_date": "2020-03-19", "price": 50,
+     "items": [ { "sku": "chocolates", "qty": 5, "price": 10 } ],
+     "status": "A"},
+
+    {"_id": 6, "cust_id": "Cam Elot", "ord_date": "2020-03-19", "price": 35,
+     "items": [ { "sku": "carrots", "qty": 10, "price": 1.0 },
+                { "sku": "apples", "qty": 10, "price": 2.5 } ],
+     "status": "A" },
+
+    {"_id": 7, "cust_id": "Cam Elot", "ord_date": "2020-03-20", "price": 25,
+     "items": [ { "sku": "oranges", "qty": 10, "price": 2.5 } ],
+     "status": "A" },
+
+    {"_id": 8, "cust_id": "Don Quis", "ord_date": "2020-03-20", "price": 75,
+     "items": [ { "sku": "chocolates", "qty": 5, "price": 10 },
+                { "sku": "apples", "qty": 10, "price": 2.5 } ],
+     "status": "A" },
+
+    {"_id": 9, "cust_id": "Don Quis", "ord_date": "2020-03-20", "price": 55,
+     "items": [ { "sku": "carrots", "qty": 5, "price": 1.0 },
+                { "sku": "apples", "qty": 10, "price": 2.5 },
+                { "sku": "oranges", "qty": 10, "price": 2.5 } ],
+     "status": "A" },
+
+    {"_id": 10, "cust_id": "Don Quis", "ord_date": "2020-03-23", "price": 25,
+     "items": [ { "sku": "oranges", "qty": 10, "price": 2.5 } ],
+     "status": "A" }
+]
+
+collection.insert_many(data) '''
+
+# Return the Total Price Per Customer
+
+mapFunction1 = Code("""function() {emit(this.cust_id, this.price);};""")
+
+reduceFunction1 = Code("""function(keyCustId, valuesPrices) {
+   return Array.sum(valuesPrices);
+};""")
+
+result = collection.map_reduce(mapFunction1, reduceFunction1, "myresults")
+for doc in result.find():
+    print(doc)
+
+# ----------------------------------------------------------------------
+# alternative
+agr = [ {'$group': {'_id': "$cust_id", "value": { "$sum": "$price" } } } ]
+result = val = list(collection.aggregate(agr))
+print(result)
+# ----------------------------------------------------------------------
+
+print("---------------------------------------------------------------------")
+
+# Calculate Order and Total Quantity with Average Quantity Per Item
+
+mapFunction2 = Code("""function() {
+    for (var idx = 0; idx < this.items.length; idx++) {
+       var key = this.items[idx].sku;
+       var value = { count: 1, qty: this.items[idx].qty };
+
+       emit(key, value);
+    }
+};""")
+
+reduceFunction2 = Code("""function(keySKU, countObjVals) {
+   reducedVal = { count: 0, qty: 0 };
+
+   for (var idx = 0; idx < countObjVals.length; idx++) {
+       reducedVal.count += countObjVals[idx].count;
+       reducedVal.qty += countObjVals[idx].qty;
+   }
+
+   return reducedVal;
+};""")
+
+finalizeFunction2 = """function (key, reducedVal) {
+  reducedVal.avg = reducedVal.qty/reducedVal.count;
+  return reducedVal;
+};"""
+
+result = collection.map_reduce(mapFunction2, reduceFunction2, {
+    "merge": "map_reduce_example2",
+    "finalize": finalizeFunction2
+})
+
+for doc in result.find():
+    print(doc)
