@@ -16,6 +16,7 @@ def remove_url_and_username(line):
     line = line.replace('USERNAME', '')
     return line
 
+
 # 2. process hash-tag: collect hash-tag(#) (list)
 def process_h(line, h_dictionary):
     # hashtag array [string, ...]
@@ -25,6 +26,7 @@ def process_h(line, h_dictionary):
         h_dictionary.append(element)
         line = line.replace('#'+element, '')
     return line
+
 
 # 3. process emoji and emoticons (list)
 def process_emoji_and_emoticons(line):
@@ -54,12 +56,14 @@ def process_emoji_and_emoticons(line):
 
     return line
 
+
 # 4. treatment punctuation marks and substitution with spaces
 def treatment_punctuation(line):
     for element in punctuation:
         line = line.replace(element, '')
 
     return line
+
 
 # 7. process slang word and acronyms (list)
 def replace_slang(tokens):
@@ -68,6 +72,7 @@ def replace_slang(tokens):
             if element == slang_word:
                 tokens[i] = slang_words.get(slang_word)
     return tokens
+
 
 """
     Convert POS tag from Penn tagset to WordNet tagset.
@@ -95,6 +100,7 @@ def pos_tag_convert(tag):
     else:
         return None
 
+
 def lemmatization(lemmatizer, tagged):
     result_lemma = []
     for element, tag in tagged:
@@ -107,6 +113,7 @@ def lemmatization(lemmatizer, tagged):
             result_lemma.append(lemma)
     return result_lemma
 
+
 # 12. adding to dictionary
 def adding_to_dictionary(frequency_array, global_dict_count):
     for element in frequency_array:
@@ -117,6 +124,7 @@ def adding_to_dictionary(frequency_array, global_dict_count):
             global_dict_count[element[0]] = global_dict_count.get(element[0]) + 1
         else:
             global_dict_count[element[0]] = element[1]
+
 
 def processing(emotion, global_dict_count, h_dictionary):
 
@@ -183,6 +191,7 @@ def processing(emotion, global_dict_count, h_dictionary):
     file.write(json.dumps(h_dictionary))
     file.close()
     print(total)
+
 
 # filename dataset_sentiment
 dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
