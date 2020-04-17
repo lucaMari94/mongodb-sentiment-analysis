@@ -36,6 +36,64 @@ myfile = open("../twitter_message/dataset_dt_" + "anger" + "_60k.txt", "rt", enc
 contents = myfile.read()
 myfile.close()
 
+"""
+def map(document, word):
+    if word in document:
+        return 1
+    else:
+        return 0
+
+
+def reduce(list_values_mapped):
+    cont = 0
+    for i in list_values_mapped:
+        if i == 1:
+            cont += 1
+    return cont
+"""
+
+
+def multiply2(x):
+    return x * 2
+
+
+# Output [2, 4, 6, 8]
+print(list(map(multiply2, [1, 2, 3, 4])))
+
+
+dict_a = [{'name': 'python', 'points': 10}, {'name': 'java', 'points': 8}]
+map(lambda x: x['name'], dict_a)  # Output: ['python', 'java']
+map(lambda x: x['points'] * 10, dict_a)  # Output: [100, 80]
+map(lambda x: x['name'] == "python", dict_a)  # Output: [True, False]
+
+
+list_a = [1, 2, 3]
+list_b = [10, 20, 30]
+map(lambda x, y: x + y, list_a, list_b)  # Output: [11, 22, 33]
+
+
+map_output = map(lambda x: x*2, [1, 2, 3, 4])
+print(map_output) # Output: map object: <map object at 0x04D6BAB0>
+list_map_output = list(map_output)
+print(list_map_output) # Output: [2, 4, 6, 8]
+
+
+#filter
+
+
+a = [1, 2, 3, 4, 5, 6]
+filter(lambda x : x % 2 == 0, a) # Output: [2, 4, 6]
+
+
+dict_a = [{'name': 'python', 'points': 10}, {'name': 'java', 'points': 8}]
+filter(lambda x : x['name'] == 'python', dict_a) # Output: [{'name': 'python', 'points': 10}]
+
+
+list_a = [1, 2, 3, 4, 5]
+filter_obj = filter(lambda x: x % 2 == 0, list_a) # filter object <filter at 0x4e45890>
+even_num = list(filter_obj) # Converts the filer obj to a list
+print(even_num) # Output: [2, 4]
+
 """db.words.insert = {[
  {lemma:“nice”,
  lexical_resources:{
