@@ -1,10 +1,10 @@
 import pymongo
 
-client = pymongo.MongoClient("mongodb+srv://luca_marignati:ab12pozt12Q@mongodb01-1h85h.mongodb.net/test?retryWrites=true&w=majority")
+"""client = pymongo.MongoClient("mongodb+srv://<username>:<password>@mongodb01-1h85h.mongodb.net/test?retryWrites=true&w=majority")
 
 db = client.admin # run commands against admin database.
 # db.command('enableSharding',  'prova')
-# db.command({'shardCollection': 'prova.prova', 'key': {'valueX': 1, 'valueY': 1}})
+# db.command({'shardCollection': 'prova.prova', 'key': {'valueX': 1, 'valueY': 1}})"""
 
 """
 data = [
