@@ -1,6 +1,9 @@
 from pymongo import MongoClient
 from bson.code import Code
 
+# http://aimotion.blogspot.com/2010/08/mapreduce-with-mongodb-and-python.html
+
+
 # client
 connection = MongoClient('localhost', 27017)
 db = connection.test
