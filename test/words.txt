@@ -1,0 +1,4 @@
+questo è un messaggio di prova
+questo è un testo libero
+da inserire in mongodb
+come prova di applicazione della funzione map-reduce
