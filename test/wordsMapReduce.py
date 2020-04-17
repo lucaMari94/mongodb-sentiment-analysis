@@ -11,7 +11,7 @@ myfile = open("../twitter_message/dataset_dt_" + "anger" + "_60k.txt", "rt", enc
 lines = myfile.read()
 myfile.close()
 
-[db.texts.insert_one({'text': line}) for line in lines.split()]
+[db.texts.insert_one({'word': word}) for word in lines.split()]
 
 
 # load map and reduce functions
