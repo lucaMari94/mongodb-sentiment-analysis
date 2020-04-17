@@ -36,8 +36,6 @@ myfile = open("../twitter_message/dataset_dt_" + "anger" + "_60k.txt", "rt", enc
 contents = myfile.read()
 myfile.close()
 
-print(contents)
-
 """db.words.insert = {[
  {lemma:“nice”,
  lexical_resources:{
@@ -49,6 +47,7 @@ print(contents)
  {lemma=“afraid”,lexical_resources={…}, frequency=..},
 ]}"""
 
+"""
 # client
 client = MongoClient('localhost', 27017)
 
@@ -62,4 +61,4 @@ data = { "lemma":"nice", "lexical_resources": { "EmoSN": 1, "SentiSense": 1, "NR
                               "DAL":{ "arousal": 1.3, "dominance": 0.7, "pleaseness": 0.5}
                             },
   "frequency" : 127},
-collection.insert_many(data)
+collection.insert_many(data)"""
