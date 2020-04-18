@@ -1,14 +1,16 @@
-import re
-import time
-import json
+from pymongo import MongoClient
+from bson.code import Code
+from config import slang_words, posemoticons, negemoticons, other_emoticons, \
+    EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet as wn
 from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
 from nltk import FreqDist
-from config import slang_words, posemoticons, negemoticons, other_emoticons, \
-    EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
+import re
+
+# http://aimotion.blogspot.com/2010/08/mapreduce-with-mongodb-and-python.html
 
 # 1. remove URL and USERNAME (anonymization)
 def remove_url_and_username(line):
@@ -114,27 +116,15 @@ def lemmatization(lemmatizer, tagged):
     return result_lemma
 
 
-# 12. adding to dictionary
-def adding_to_dictionary(frequency_array, global_dict_count):
-    for element in frequency_array:
-        # element[0] = word
-        # element[1] = count
+def processing(h_dictionary, words):
 
-        if element[0] in global_dict_count.keys():
-            global_dict_count[element[0]] = global_dict_count.get(element[0]) + element[1] # 1
-        else:
-            global_dict_count[element[0]] = element[1]
-
-
-def processing(emotion, global_dict_count, h_dictionary):
-
-    # read file
-    myfile = open("twitter_message/dataset_dt_" + emotion + "_60k.txt", "rt", encoding='utf-8')
-    contents = myfile.read()
+    # myfile = open("words.txt", "rt", encoding='utf-8')
+    myfile = open("../twitter_message/dataset_dt_" + "anger" + "_60k.txt", "rt", encoding='utf-8')
+    lines = myfile.read()
     myfile.close()
-    t0 = time.time()
 
-    for line in contents.splitlines():
+    for line in lines.splitlines():
+
         # 1. remove URL and USERNAME
         line = remove_url_and_username(line)
 
@@ -170,37 +160,32 @@ def processing(emotion, global_dict_count, h_dictionary):
         stop_words = set(stopwords.words('english'))
         filtered_sentence = [word for word in result_lemma if not word in stop_words]
         # print(filtered_sentence)
+        words.extend(filtered_sentence)
+        # return filtered_sentence
 
-        # 11. stem frequency counting (for each word)
-        frequency_dist = FreqDist(filtered_sentence)
-        frequency_array = frequency_dist.most_common()
-        # print(frequency_array)
+# client
+connection = MongoClient('localhost', 27017)
+db = connection.test
+"""
+# insert data
+h_dictionary = []
 
-        # 12. adding to dictionary
-        adding_to_dictionary(frequency_array, global_dict_count)
+# global dictionary count
+words = []
+processing(h_dictionary, words)
+# print(h_dictionary)
+# print(words)
 
-    # timer
-    t1 = time.time()
-    total = t1 - t0
+# myfile = open("words.txt", "rt", encoding='utf-8')
+[db.texts.insert_one({'word': word}) for word in words]
+"""
 
-    file = open("result_count/" + emotion + "_global_dict_count.txt", "a", encoding='utf-8')
-    file.write(json.dumps(global_dict_count))
-    file.close()
+# load map and reduce functions
+map = Code(open('wordMap.js', 'r').read())
+reduce = Code(open('wordReduce.js', 'r').read())
 
-    file = open("result_count/" + emotion + "_hashtag.txt", "a", encoding='utf-8')
-    file.write(json.dumps(h_dictionary))
-    file.close()
-    print(total)
+# run the map-reduce query
+results = db.texts.map_reduce(map, reduce, "output")
 
-
-# filename dataset_sentiment
-dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
-
-for emotion in dataset_sentiment:
-    # hashtag array
-    h_dictionary = []
-
-    # global dictionary count
-    global_dict_count = {}
-    global_dict_count.clear()
-    processing(emotion, global_dict_count, h_dictionary)
+for result in results.find():
+    print(result['_id'], result['value']['count'])

@@ -1,6 +1,6 @@
 function wordMap(){
     // find words in the document text
-    var words = this.text.match(/\w+/g);
+    var words = this.word.match(/\w+/g);
 
     if(words == null){
         return
