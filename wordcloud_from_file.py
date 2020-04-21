@@ -4,6 +4,7 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import ast
 import matplotlib.pyplot as plt
 
+
 # read from file
 def load_emotion_from_dict(emotion):
     myfile = open("result_count/" + emotion + "_global_dict_count.txt", "rt", encoding='utf-8')
@@ -11,13 +12,16 @@ def load_emotion_from_dict(emotion):
     myfile.close()
     return dict
 
+
 def load_emotion_from_hashtag(emotion):
     myfile = open("result_count/" + emotion + "_hashtag.txt", "rt", encoding='utf-8')
     dict = myfile.read()
     myfile.close()
     return dict
 
+
 dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
+
 
 # dictionary
 for emotion in dataset_sentiment:
@@ -38,6 +42,7 @@ for emotion in dataset_sentiment:
     plt.axis('off')
     plt.tight_layout(pad=0)
     plt.show()"""
+
 
 # hashtag
 for emotion in dataset_sentiment:

@@ -171,8 +171,20 @@ def processing(emotion, global_dict_count, h_dictionary):
         filtered_sentence = [word for word in result_lemma if not word in stop_words]
         # print(filtered_sentence)
 
+        # 10.5. optimization
+        # remove words lenght == 1
+        filtered_sentence_opt = [word for word in filtered_sentence if len(word) > 1]
+        # remove number words
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if not (word.isdigit() or word[0] == '-' and word[1:].isdigit())]
+
+        # print(filtered_sentence_opt)
+        # remove common words: i'm, get, go
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "i'm"]
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "get"]
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "go"]
+
         # 11. stem frequency counting (for each word)
-        frequency_dist = FreqDist(filtered_sentence)
+        frequency_dist = FreqDist(filtered_sentence_opt)
         frequency_array = frequency_dist.most_common()
         # print(frequency_array)
 
