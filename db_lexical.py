@@ -417,9 +417,3 @@ for element in global_con_score:
     dict = get_lexical_archive("ConScore", element)
     dict_con_score = get_lexical_archive_con_score(dict)
     update_db_con_score(dict_con_score, "trust", global_con_score.get(element), "trust_global_dict_count")
-
-
-
-
-
-
