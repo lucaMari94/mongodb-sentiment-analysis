@@ -29,29 +29,38 @@ def process_h(line, h_dictionary):
 
 
 # 3. process emoji and emoticons (list)
-def process_emoji_and_emoticons(line):
+def process_emoji_and_emoticons(line,emoticons_dictionary,emoji_dictionary):
+
     for element in posemoticons:
+        emoticons_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in negemoticons:
+        emoticons_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in other_emoticons:
+        emoticons_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in EmojiPos:
+        emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in EmojiNeg:
+        emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in OthersEmoji:
+        emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in AdditionalEmoji:
+        emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in MyEmoji:
+        emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     return line
@@ -126,7 +135,7 @@ def adding_to_dictionary(frequency_array, global_dict_count):
             global_dict_count[element[0]] = element[1]
 
 
-def processing(emotion, global_dict_count, h_dictionary):
+def processing(emotion, global_dict_count, h_dictionary,emoticons_dictionary,emoji_dictionary):
 
     # read file
     myfile = open("twitter_message/dataset_dt_" + emotion + "_60k.txt", "rt", encoding='utf-8')
@@ -142,7 +151,7 @@ def processing(emotion, global_dict_count, h_dictionary):
         line = process_h(line, h_dictionary)
 
         # 3. process emoji and emoticons (list)
-        line = process_emoji_and_emoticons(line)
+        line = process_emoji_and_emoticons(line,emoticons_dictionary,emoji_dictionary)
 
         # 4. treatment punctuation marks and substitution with spaces
         line = treatment_punctuation(line)
@@ -202,17 +211,39 @@ def processing(emotion, global_dict_count, h_dictionary):
     file = open("result_count/" + emotion + "_hashtag.txt", "a", encoding='utf-8')
     file.write(json.dumps(h_dictionary))
     file.close()
-    print(total)
 
+    with open("result_count/" + emotion + "_emoticons.txt", "wb") as f:
+        for emoticon in emoticons_dictionary:
+            f.write(emoticon.encode('utf-8'))
+            f.write(' '.encode('utf-8'))
+
+    f.close()
+
+    with open("result_count/" + emotion + "_emoji.txt", "wb") as f:
+        for emoji in emoji_dictionary:
+            if emoji != '\udf08':
+                f.write(emoji.encode('utf-8'))
+                f.write(' '.encode('utf-8'))
+
+
+
+    #file.write(json.dumps(emoji_dictionary))
+    f.close()
+
+
+    print(total)
 
 # filename dataset_sentiment
 dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
+
 for emotion in dataset_sentiment:
     # hashtag array
     h_dictionary = []
+    emoji_dictionary = []
+    emoticons_dictionary = []
 
     # global dictionary count
     global_dict_count = {}
     global_dict_count.clear()
-    processing(emotion, global_dict_count, h_dictionary)
+    processing(emotion, global_dict_count, h_dictionary,emoticons_dictionary,emoji_dictionary)
