@@ -10,6 +10,7 @@ from nltk import FreqDist
 from config import slang_words, posemoticons, negemoticons, other_emoticons, \
     EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
 
+
 # 1. remove URL and USERNAME (anonymization)
 def remove_url_and_username(line):
     line = line.replace('URL', '')
@@ -29,38 +30,58 @@ def process_h(line, h_dictionary):
 
 
 # 3. process emoji and emoticons (list)
-def process_emoji_and_emoticons(line,emoticons_dictionary,emoji_dictionary):
+def process_emoji_and_emoticons(line, emoticons_dictionary, emoji_dictionary):
 
+    # save to emoticons_dictionary and emoji_dictionary
+    for word in line.split():
+        if word in posemoticons:
+            emoticons_dictionary.append(word)
+        if word in negemoticons:
+            emoticons_dictionary.append(word)
+        if word in other_emoticons:
+            emoticons_dictionary.append(word)
+        if word in EmojiPos:
+            emoji_dictionary.append(word)
+        if word in EmojiNeg:
+            emoji_dictionary.append(word)
+        if word in OthersEmoji:
+            emoji_dictionary.append(word)
+        if word in AdditionalEmoji:
+            emoji_dictionary.append(word)
+        if word in MyEmoji:
+            emoji_dictionary.append(word)
+
+    #clear line
     for element in posemoticons:
-        emoticons_dictionary.append(element)
+        # emoticons_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in negemoticons:
-        emoticons_dictionary.append(element)
+        # emoticons_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in other_emoticons:
-        emoticons_dictionary.append(element)
+        # emoticons_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in EmojiPos:
-        emoji_dictionary.append(element)
+        # emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in EmojiNeg:
-        emoji_dictionary.append(element)
+        # emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in OthersEmoji:
-        emoji_dictionary.append(element)
+        # emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in AdditionalEmoji:
-        emoji_dictionary.append(element)
+        # emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     for element in MyEmoji:
-        emoji_dictionary.append(element)
+        # emoji_dictionary.append(element)
         line = line.replace(element, '')
 
     return line
@@ -200,6 +221,40 @@ def processing(emotion, global_dict_count, h_dictionary,emoticons_dictionary,emo
         # 12. adding to dictionary
         adding_to_dictionary(frequency_array, global_dict_count)
 
+    return {
+        "t0": t0,
+        "global_dict_count": global_dict_count,
+        "h_dictionary": h_dictionary,
+        "emoticons_dictionary": emoticons_dictionary,
+        "emoji_dictionary": emoji_dictionary
+    }
+
+
+# filename dataset_sentiment
+dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
+
+for emotion in dataset_sentiment:
+    # hashtag array
+
+    h_dictionary = []
+
+    # emoticons_dictionary array
+    emoticons_dictionary = []
+
+    # emoji_dictionary array
+    emoji_dictionary = []
+
+    # global dictionary count
+    global_dict_count = {}
+    global_dict_count.clear()
+    result = processing(emotion, global_dict_count, h_dictionary, emoticons_dictionary, emoji_dictionary)
+
+    t0 = result.get('t0')
+    global_dict_count = result.get('global_dict_count')
+    h_dictionary = result.get('h_dictionary')
+    emoticons_dictionary = result.get('emoticons_dictionary')
+    emoji_dictionary = result.get('emoji_dictionary')
+
     # timer
     t1 = time.time()
     total = t1 - t0
@@ -225,25 +280,6 @@ def processing(emotion, global_dict_count, h_dictionary,emoticons_dictionary,emo
                 f.write(emoji.encode('utf-8'))
                 f.write(' '.encode('utf-8'))
 
-
-
-    #file.write(json.dumps(emoji_dictionary))
     f.close()
 
-
     print(total)
-
-# filename dataset_sentiment
-dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
-
-
-for emotion in dataset_sentiment:
-    # hashtag array
-    h_dictionary = []
-    emoji_dictionary = []
-    emoticons_dictionary = []
-
-    # global dictionary count
-    global_dict_count = {}
-    global_dict_count.clear()
-    processing(emotion, global_dict_count, h_dictionary,emoticons_dictionary,emoji_dictionary)
