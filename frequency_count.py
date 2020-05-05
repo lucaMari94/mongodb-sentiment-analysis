@@ -66,7 +66,7 @@ def perc_lexical_into_twitter_msg(emotion):
 
 arr_emotions = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
-file = open("result_frequency/frequency.txt", "a", encoding='utf-8')
+file = open("frequency.txt", "a", encoding='utf-8')
 
 for emotion in arr_emotions:
     perc_count = perc_lexical_into_twitter_msg(emotion)
