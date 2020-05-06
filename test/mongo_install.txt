@@ -78,7 +78,10 @@ sh.shardCollection(
 -----------------------------------------------------------------------------------------
 mongoimport --host localhost:27021 --db test --collection cities --type json ./Desktop/mongoCities100000.json
 mongoimport --host localhost:27021 --db test --collection cities --type json ./Desktop/cities.json
+
+mongoimport --host localhost:27021 --db test --collection anger --type json .\Desktop\MAADB\maadb\test\result.json
 -----------------------------------------------------------------------------------------
 mongo localhost:27021
 db.collection.getShardDistribution()
 db.cities.getShardDistribution()
+db.anger.getShardDistribution()

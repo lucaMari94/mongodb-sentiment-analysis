@@ -1,3 +1,5 @@
+import json
+
 from pymongo import MongoClient
 from bson.code import Code
 from config import slang_words, posemoticons, negemoticons, other_emoticons, \
@@ -164,22 +166,31 @@ def processing(h_dictionary, words):
         # return filtered_sentence
 
 # client
-connection = MongoClient('localhost', 27017)
+connection = MongoClient('localhost', 27021)
 db = connection.test
-"""
+
 # insert data
 h_dictionary = []
 
 # global dictionary count
 words = []
 processing(h_dictionary, words)
-# print(h_dictionary)
+
+words_dictionary = []
+for word in words:
+    x = {
+        "word": word
+    }
+    words_dictionary.append(x)
+
 # print(words)
-
+file = open("result.json", "w", encoding='utf-8')
+file.write(json.dumps(words_dictionary))
+file.close()
 # myfile = open("words.txt", "rt", encoding='utf-8')
-[db.texts.insert_one({'word': word}) for word in words]
-"""
+# [db.anger.insert_one({'word': word}) for word in words]
 
+"""
 # load map and reduce functions
 map = Code(open('wordMap.js', 'r').read())
 reduce = Code(open('wordReduce.js', 'r').read())
@@ -188,4 +199,4 @@ reduce = Code(open('wordReduce.js', 'r').read())
 results = db.texts.map_reduce(map, reduce, "output")
 
 for result in results.find():
-    print(result['_id'], result['value']['count'])
+    print(result['_id'], result['value']['count'])"""
