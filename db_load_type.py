@@ -42,7 +42,7 @@ def insert_db(dict_lexical_archive,db,emotion,type):
             print(e)
 
 
-"""
+
 #############################################################################
 # Hope 
 
@@ -105,7 +105,6 @@ for element in dict_attribute_boolean:
     dict_lexical_archive = get_lexical_archive("Like-Love", element)
     insert_db(dict_lexical_archive,db,"trust","like")
 
-"""
 
 # Love
 
