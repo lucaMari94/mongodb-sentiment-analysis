@@ -1,0 +1,84 @@
+mongod --replSet book --dbpath ./Desktop/cluster/replicaset1 --port 27011
+mongod --replSet book --dbpath ./Desktop/cluster/replicaset2 --port 27012
+mongod --replSet book --dbpath ./Desktop/cluster/replicaset3 --port 27013
+-----------------------------------------------------------------------------------------
+mongo localhost:27011
+
+rs.initiate({_id: 'book',
+members: [
+{_id: 1, host: 'localhost:27011'},
+{_id: 2, host: 'localhost:27012'},
+{_id: 3, host: 'localhost:27013'}
+]
+})
+
+rs.status().ok
+-----------------------------------------------------------------------------------------
+db.isMaster().primary
+-----------------------------------------------------------------------------------------
+mongod --shardsvr --dbpath ./Desktop/cluster/shard1 --port 27014
+mongod --shardsvr --dbpath ./Desktop/cluster/shard2 --port 27015	--> LUCA
+mongod --shardsvr --dbpath ./Desktop/cluster/shard2 --port 27018	--> SIMO&DAVI
+mongod --shardsvr --dbpath ./Desktop/cluster/shard3 --port 27016
+-----------------------------------------------------------------------------------------
+mongod --configsvr --replSet configSet --dbpath ./Desktop/cluster/mongoconfig --port 27019	--> SIMO&DAVI
+mongod --configsvr --replSet configSet --dbpath ./Desktop/cluster/mongoconfig --port 27020	--> LUCA
+-----------------------------------------------------------------------------------------
+mongo localhost:27019 	--> SIMO&DAVI
+mongo:localhost:27020	--> LUCA
+
+SIMO&DAVI
+rs.initiate({
+_id: 'configSet',
+configsvr: true,
+members: [{
+_id: 0,
+host: 'localhost:27019'
+}]
+})
+
+LUCA
+rs.initiate({
+_id: 'configSet',
+configsvr: true,
+members: [{
+_id: 0,
+host: 'localhost:27020'	
+}]
+})
+
+rs.status().ok
+-----------------------------------------------------------------------------------------
+mongos --configdb configSet/localhost:27019 --port 27021	--> SIMO&DAVI
+mongos --configdb configSet/localhost:27020 --port 27021	--> LUCA
+-----------------------------------------------------------------------------------------
+mongo localhost:27021/admin
+
+LUCA
+sh.addShard('localhost:27014')
+sh.addShard('localhost:27015')
+sh.addShard('localhost:27016')
+
+SIMO&DAVI
+sh.addShard('localhost:27014')
+sh.addShard('localhost:27018')
+sh.addShard('localhost:27016')
+-----------------------------------------------------------------------------------------
+db.runCommand({ enablesharding : "test" })
+-----------------------------------------------------------------------------------------
+sh.shardCollection(
+  "test.cities",
+  { name:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+-----------------------------------------------------------------------------------------
+mongoimport --host localhost:27021 --db test --collection cities --type json ./Desktop/mongoCities100000.json
+mongoimport --host localhost:27021 --db test --collection cities --type json ./Desktop/cities.json
+-----------------------------------------------------------------------------------------
+mongo localhost:27021
+db.collection.getShardDistribution()
+db.cities.getShardDistribution()
