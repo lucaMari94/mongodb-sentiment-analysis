@@ -51,7 +51,7 @@ def process_emoji_and_emoticons(line, emoticons_dictionary, emoji_dictionary):
         if word in MyEmoji:
             emoji_dictionary.append(word)
 
-    #clear line
+    # clear line
     for element in posemoticons:
         # emoticons_dictionary.append(element)
         line = line.replace(element, '')
