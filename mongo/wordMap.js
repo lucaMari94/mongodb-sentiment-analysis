@@ -1,0 +1,14 @@
+function wordMap(){
+
+	//var words = this.word.match(/\w+/g);
+    //var words =  this.word.match(/(\:\w+\:|\<[\/\\]?3|[\(\)\\\D|\*\$][\-\^]?[\:\;\=]|[\:\;\=B8][\-\^]?[3DOPp\@\$\*\\\)\(\/\|])(?=\s|[\!\.\?]|$)/g);
+	var words =  this.word.match(/[:\-)D]+/g);
+
+	if(words == null) {
+		return;
+	}
+
+	for (var i = 0; i < words.length; i++){
+		emit(words[i], {count: 1});
+	}
+}
