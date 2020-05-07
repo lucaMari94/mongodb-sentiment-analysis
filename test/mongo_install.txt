@@ -25,7 +25,7 @@ mongod --configsvr --replSet configSet --dbpath ./Desktop/cluster/mongoconfig --
 mongod --configsvr --replSet configSet --dbpath ./Desktop/cluster/mongoconfig --port 27020	--> LUCA
 -----------------------------------------------------------------------------------------
 mongo localhost:27019 	--> SIMO&DAVI
-mongo:localhost:27020	--> LUCA
+mongo localhost:27020	--> LUCA
 
 SIMO&DAVI
 rs.initiate({
