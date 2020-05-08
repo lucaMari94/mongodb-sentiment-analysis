@@ -1,7 +1,6 @@
 import re
 import pymongo
 import nltk
-from bson import Code
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from nltk.tokenize import TweetTokenizer
@@ -151,133 +150,110 @@ def lemmatization(lemmatizer, tagged):
             result_lemma.append(lemma)
     return result_lemma
 
-"""
-words = []
-for line in contents.splitlines():
-    # 1. remove URL and USERNAME
-    line = remove_url_and_username(line)
 
-    # 2. process hash-tag: collect hash-tag(#) (list)
-    line = process_h(line, h_dictionary)
+def processing(words, h_dictionary, emoticons_dictionary, emoji_dictionary):
 
-    # 3. process emoji and emoticons (list)
-    line = process_emoji_and_emoticons(line, emoticons_dictionary, emoji_dictionary)
+    for line in contents.splitlines():
+        # 1. remove URL and USERNAME
+        line = remove_url_and_username(line)
 
-    # 4. treatment punctuation marks and substitution with spaces
-    line = treatment_punctuation(line)
+        # 2. process hash-tag: collect hash-tag(#) (list)
+        line = process_h(line, h_dictionary)
 
-    # 5. transformation to lower case
-    line = line.lower()
+        # 3. process emoji and emoticons (list)
+        line = process_emoji_and_emoticons(line, emoticons_dictionary, emoji_dictionary)
 
-    # 6. sentence tokenisation
-    # tokens = nltk.word_tokenize(line)
-    tknzr = TweetTokenizer()
-    tokens = tknzr.tokenize(line)
+        # 4. treatment punctuation marks and substitution with spaces
+        line = treatment_punctuation(line)
 
-    # 7. process slang word and acronyms (list)
-    tokens = replace_slang(tokens)
+        # 5. transformation to lower case
+        line = line.lower()
 
-    # 8. POS tagging
-    tagged = nltk.pos_tag(tokens)
-    # print(tagged)
+        # 6. sentence tokenisation
+        # tokens = nltk.word_tokenize(line)
+        tknzr = TweetTokenizer()
+        tokens = tknzr.tokenize(line)
 
-    # 9. lemmatization
-    lemmatizer = WordNetLemmatizer()
-    result_lemma = lemmatization(lemmatizer, tagged)
+        # 7. process slang word and acronyms (list)
+        tokens = replace_slang(tokens)
 
-    # 10. stop words elimination
-    stop_words = set(stopwords.words('english'))
-    filtered_sentence = [word for word in result_lemma if not word in stop_words]
-    # print(filtered_sentence)
+        # 8. POS tagging
+        tagged = nltk.pos_tag(tokens)
+        # print(tagged)
 
-    # 10.5. optimization
-    # remove words lenght == 1
-    filtered_sentence_opt = [word for word in filtered_sentence if len(word) > 1]
-    # remove number words
-    filtered_sentence_opt = [word for word in filtered_sentence_opt if
-                             not (word.isdigit() or word[0] == '-' and word[1:].isdigit())]
+        # 9. lemmatization
+        lemmatizer = WordNetLemmatizer()
+        result_lemma = lemmatization(lemmatizer, tagged)
 
-    # print(filtered_sentence_opt)
-    # remove common words: i'm, get, go
-    filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "i'm"]
-    filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "get"]
-    filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "go"]
+        # 10. stop words elimination
+        stop_words = set(stopwords.words('english'))
+        filtered_sentence = [word for word in result_lemma if not word in stop_words]
+        # print(filtered_sentence)
 
-    # append array
-    words.extend(filtered_sentence)
-"""
+        # 10.5. optimization
+        # remove words lenght == 1
+        filtered_sentence_opt = [word for word in filtered_sentence if len(word) > 1]
+        # remove number words
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if
+                                 not (word.isdigit() or word[0] == '-' and word[1:].isdigit())]
+
+        # print(filtered_sentence_opt)
+        # remove common words: i'm, get, go
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "i'm"]
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "get"]
+        filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "go"]
+
+        # append array
+        words.extend(filtered_sentence)
+
+        return {
+            "words": words,
+            "h_dictionary": h_dictionary,
+            "emoticons_dictionary": emoticons_dictionary,
+            "emoji_dictionary": emoji_dictionary
+        }
+
+
+
 client = pymongo.MongoClient("mongodb://localhost:27021/?readPreference=primary&appname=MongoDB%20Compass%20Community"
                              "&ssl=false&retryWrites=false&w=majority")
 
 db = client['emotion']
 
-anger = db['anger']
+# dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
+dataset_sentiment = ["anger"]
 
-# Remove any existing data: delete_many
-# anger.remove()
+for emotion in dataset_sentiment:
 
-# Insert the data: insert_one
-# anger.insert({'word': word} for word in words)
+    h_dictionary = []
 
-anger_emoji = db['anger_emoji']
-"""anger_emoji.remove()
-anger_emoji.insert({'word': emoji} for emoji in emoji_dictionary)
-"""
+    # emoticons_dictionary array
+    emoticons_dictionary = []
 
-anger_emoticons = db['anger_emoticons']
-"""anger_emoticons.remove()
-anger_emoticons.insert({'word': emoticon} for emoticon in emoticons_dictionary)
-"""
+    # emoji_dictionary array
+    emoji_dictionary = []
 
-anger_hashtag = db['anger_hashtag']
-"""anger_hashtag.remove()
-anger_hashtag.insert({'word': hashtag} for hashtag in h_dictionary)
-"""
+    words = []
 
+    result = processing(words, h_dictionary, emoticons_dictionary, emoji_dictionary)
 
+    words = result.get('words')
+    h_dictionary = result.get('h_dictionary')
+    emoticons_dictionary = result.get('emoticons_dictionary')
+    emoji_dictionary = result.get('emoji_dictionary')
 
-# Load map and reduce functions
-map = Code(open('wordMap.js', 'r').read())
-reduce = Code(open('wordReduce.js', 'r').read())
+    emotion_word = db[emotion + '_word']
+    emotion_word.remove()
+    emotion_word.insert({'word': word} for word in words)
 
-results = anger.map_reduce(map, reduce, "anger_frequency")
-anger_emoji.map_reduce(map, reduce, "anger_emoji_frequency")
-anger_emoticons.map_reduce(map, reduce, "anger_emoticons_frequency")
-anger_hashtag.map_reduce(map, reduce, "anger_hashtag_frequency")
+    emotion_emoji = db[emotion + '_emoji']
+    emotion_emoji.remove()
+    emotion_emoji.insert({'word': emoji} for emoji in emoji_dictionary)
 
-"""
-anger_hashtag_frequency = db['anger_hashtag_frequency']
-for x in anger_hashtag_frequency.find():
-  print(x)"""
-# Print the results
-"""for result in results.find():
-    print(result['_id'], result['value']['count'])"""
+    emotion_emoticons = db[emotion + '_emoticons']
+    emotion_emoticons.remove()
+    emotion_emoticons.insert({'word': emoticon} for emoticon in emoticons_dictionary)
 
-anger_emoticons_frequency = db['anger_emoticons_frequency']
-anger_emoji_frequency = db['anger_emoji_frequency']
-anger_hashtag_frequency = db['anger_hashtag_frequency']
-anger_frequency = db['anger_frequency']
-
-total = 0
-for result in anger_emoticons_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total emotions = " + str(total))
-
-total = 0
-for result in anger_emoji_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total emoji = " + str(total))
-
-total = 0
-for result in anger_hashtag_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total hashtag = " + str(total))
-
-total = 0
-for result in anger_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total count anger = " + str(total))
+    emotion_hashtag = db[emotion + '_hashtag']
+    emotion_hashtag.remove()
+    emotion_hashtag.insert({'word': hashtag} for hashtag in h_dictionary)
