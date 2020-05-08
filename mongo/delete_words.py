@@ -12,7 +12,10 @@ for emotion in dataset_sentiment:
     emotion_word = db[emotion + '_word']
 
     myquery = {"word": "get"}
-    myquery = {"word": "go"}
-    myquery = {"word": "i'm"}
+    emotion_word.delete_many(myquery)
 
-    emotion_word.delete_one(myquery)
+    myquery = {"word": "go"}
+    emotion_word.delete_many(myquery)
+
+    myquery = {"word": "i'm"}
+    emotion_word.delete_many(myquery)
