@@ -6,6 +6,7 @@ import string
 import ast
 from os import path
 import os
+import json
 
 
 # read from dict file
@@ -40,22 +41,23 @@ def load_emoji_from_dict(emotion):
     return dict
 
 
-dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
+dataset_sentiment = ["anticipation","disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
 # dictionary
 for emotion in dataset_sentiment:
 
-     string_dict = load_emotion_from_dict(emotion)
-     dict = ast.literal_eval(string_dict)
+    string_dict = load_emotion_from_dict(emotion)
 
-     twitter_mask = np.array(Image.open("img/twitter.jpg"))
+    dict = ast.literal_eval(string_dict)
+
+    twitter_mask = np.array(Image.open("img/twitter.jpg"))
 
     # max_words=50
-     wc = WordCloud(width=512, height=512, background_color='white', stopwords=STOPWORDS, 
-     mask=twitter_mask)
-     wc.generate_from_frequencies(dict)
+    wc = WordCloud(width=512, height=512, background_color='white', stopwords=STOPWORDS,
+                   mask=twitter_mask)
+    wc.generate_from_frequencies(dict)
 
-     wc.to_file("img/" + emotion + "_dict_wordcloud.jpg")
+    wc.to_file("img/" + emotion + "_dict_wordcloud.jpg")
 
 # hashtag
 for emotion in dataset_sentiment:
@@ -63,8 +65,8 @@ for emotion in dataset_sentiment:
 
     twitter_mask = np.array(Image.open("img/twitter.jpg"))
 
-    wc = WordCloud(width=512, height=512, background_color='white', collocations=False, stopwords=STOPWORDS, 
-    mask=twitter_mask)
+    wc = WordCloud(width=512, height=512, background_color='white', collocations=False, stopwords=STOPWORDS,
+                   mask=twitter_mask)
     wc.generate(hashtag)
 
     wc.to_file("img/" + emotion + "_hashtag_wordcloud.jpg")
@@ -89,7 +91,6 @@ for emotion in dataset_sentiment:
 
 # emoji
 for emotion in dataset_sentiment:
-
     emoji = load_emoji_from_dict(emotion)
 
     twitter_mask = np.array(Image.open("img/twitter.jpg"))
@@ -98,7 +99,7 @@ for emotion in dataset_sentiment:
     regexp = r"{emoji}".format(emoji=emoji_format)
 
     d = path.dirname(__file__) if "__file__" in locals() else os.getcwd()
-    font_path = path.join(d,'fonts', 'Symbola', 'Symbola.ttf')
+    font_path = path.join(d, 'fonts', 'Symbola', 'Symbola.ttf')
 
     wc = WordCloud(width=512, height=512, font_path=font_path, regexp=regexp,
                    collocations=False, background_color='white', mask=twitter_mask)
