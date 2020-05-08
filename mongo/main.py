@@ -199,7 +199,7 @@ def processing(emotion, words, h_dictionary, emoticons_dictionary, emoji_diction
         filtered_sentence_opt = [word for word in filtered_sentence_opt if word != "go"]
 
         # append array
-        words.extend(filtered_sentence)
+        words.extend(filtered_sentence_opt)
 
     return {
         "words": words,
