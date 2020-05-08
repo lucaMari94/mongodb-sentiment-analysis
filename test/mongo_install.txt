@@ -65,10 +65,22 @@ sh.addShard('localhost:27018')
 sh.addShard('localhost:27016')
 -----------------------------------------------------------------------------------------
 db.runCommand({ enablesharding : "test" })
+
+db.runCommand({ enablesharding : "emotion" })
 -----------------------------------------------------------------------------------------
 sh.shardCollection(
   "test.cities",
   { name:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.anger",
+  { word:"hashed" },
   false,
   {
     numInitialChunks: 5,
@@ -84,4 +96,5 @@ mongoimport --host localhost:27021 --db test --collection anger --type json .\De
 mongo localhost:27021
 db.collection.getShardDistribution()
 db.cities.getShardDistribution()
+use emotion
 db.anger.getShardDistribution()
