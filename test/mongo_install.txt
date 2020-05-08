@@ -79,7 +79,77 @@ sh.shardCollection(
 )
 
 sh.shardCollection(
-  "emotion.anger",
+  "emotion.anger_word",
+  { word:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.anticipation_word",
+  { word:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.disgust_word",
+  { word:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.fear_word",
+  { word:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.joy_word",
+  { word:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.sadness_word",
+  { word:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.surprise_word",
+  { word:"hashed" },
+  false,
+  {
+    numInitialChunks: 5,
+    collation: { locale: "simple" }
+  }
+)
+
+sh.shardCollection(
+  "emotion.trust_word",
   { word:"hashed" },
   false,
   {
