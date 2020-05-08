@@ -167,4 +167,11 @@ mongo localhost:27021
 db.collection.getShardDistribution()
 db.cities.getShardDistribution()
 use emotion
-db.anger.getShardDistribution()
+db.anger_word.getShardDistribution()
+db.anticipation_word.getShardDistribution()
+db.disgust_word.getShardDistribution()
+db.fear_word.getShardDistribution()
+db.joy_word.getShardDistribution()
+db.sadness_word.getShardDistribution()
+db.surprise_word.getShardDistribution()
+db.trust_word.getShardDistribution()
