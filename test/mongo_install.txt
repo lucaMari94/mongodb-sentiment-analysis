@@ -64,10 +64,10 @@ sh.addShard('localhost:27014')
 sh.addShard('localhost:27018')
 sh.addShard('localhost:27016')
 -----------------------------------------------------------------------------------------
-db.runCommand({ enablesharding : "emotion" })
+db.runCommand({ enablesharding : "test" })
 -----------------------------------------------------------------------------------------
 sh.shardCollection(
-  "emotion.anger",
+  "test.cities",
   { name:"hashed" },
   false,
   {
