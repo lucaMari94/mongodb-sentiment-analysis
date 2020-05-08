@@ -5,8 +5,7 @@ client = pymongo.MongoClient("mongodb://localhost:27021/?readPreference=primary&
 
 db = client['emotion']
 
-# dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
-dataset_sentiment = ["anger"]
+dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
 for emotion in dataset_sentiment:
     emotion_emoticons_frequency = db[emotion + '_emoticons_frequency']
