@@ -7,53 +7,20 @@ client = pymongo.MongoClient("mongodb://localhost:27021/?readPreference=primary&
 
 db = client['emotion']
 
-anger = db['anger']
-anger_emoji = db['anger_emoji']
-anger_emoticons = db['anger_emoticons']
-anger_hashtag = db['anger_hashtag']
+dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
-# Load map and reduce functions
-map = Code(open('wordMap.js', 'r').read())
-reduce = Code(open('wordReduce.js', 'r').read())
+for emotion in dataset_sentiment:
 
-results = anger.map_reduce(map, reduce, "anger_frequency")
-anger_emoji.map_reduce(map, reduce, "anger_emoji_frequency")
-anger_emoticons.map_reduce(map, reduce, "anger_emoticons_frequency")
-anger_hashtag.map_reduce(map, reduce, "anger_hashtag_frequency")
+    emotion_word = db[emotion + '_word']
+    emotion_emoji = db[emotion + '_emoji']
+    emotion_emoticons = db[emotion + '_emoticons']
+    emotion_hashtag = db[emotion +'_hashtag']
 
-"""
-anger_hashtag_frequency = db['anger_hashtag_frequency']
-for x in anger_hashtag_frequency.find():
-  print(x)"""
-# Print the results
-"""for result in results.find():
-    print(result['_id'], result['value']['count'])"""
+    # Load map and reduce functions
+    map = Code(open('wordMap.js', 'r').read())
+    reduce = Code(open('wordReduce.js', 'r').read())
 
-anger_emoticons_frequency = db['anger_emoticons_frequency']
-anger_emoji_frequency = db['anger_emoji_frequency']
-anger_hashtag_frequency = db['anger_hashtag_frequency']
-anger_frequency = db['anger_frequency']
-
-total = 0
-for result in anger_emoticons_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total emotions = " + str(total))
-
-total = 0
-for result in anger_emoji_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total emoji = " + str(total))
-
-total = 0
-for result in anger_hashtag_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total hashtag = " + str(total))
-
-total = 0
-for result in anger_frequency.find():
-    total += result['value']['count']
-    # print(result['_id'], result['value']['count'])
-print("total count anger = " + str(total))
+    results = emotion_word.map_reduce(map, reduce, emotion + "_frequency")
+    emotion_emoji.map_reduce(map, reduce, emotion + "_emoji_frequency")
+    emotion_emoticons.map_reduce(map, reduce, emotion + "_emoticons_frequency")
+    emotion_hashtag.map_reduce(map, reduce, emotion + "_hashtag_frequency")
