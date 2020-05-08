@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+</head>
+<body>
+
+<h2>Use JavaScript to Change Text</h2>
+<p>This example writes "Hello JavaScript!" into an HTML element with id="demo":</p>
+
+<p id="demo"></p>
+
+<script>
+// \ S indica qualsiasi carattere non bianco.
+var regex = /^\s*\S+(\s?\S)*\s*$/;
+	console.log(regex)
+	var cases = [" ","   ",":)","-_-","prova","🍔","😀"];
+	for(var i=0,l=cases.length;i<l;i++)
+	{
+		if(regex.test(cases[i]))
+			console.log(cases[i]+' matches');
+		else
+			console.log(cases[i]+' doesn\'t match');
+
+	}
+</script> 
+
+</body>
+</html>
