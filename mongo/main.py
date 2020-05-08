@@ -9,15 +9,6 @@ from config import slang_words, posemoticons, negemoticons, other_emoticons, \
     EmojiPos, EmojiNeg, OthersEmoji, AdditionalEmoji, MyEmoji, punctuation
 
 
-myfile = open("../twitter_message/dataset_dt_" + "anger" + "_60k.txt", "rt", encoding='utf-8')
-contents = myfile.read()
-myfile.close()
-
-h_dictionary = []
-emoticons_dictionary = []
-emoji_dictionary = []
-
-
 # 1. remove URL and USERNAME (anonymization)
 def remove_url_and_username(line):
     line = line.replace('URL', '')
@@ -151,7 +142,11 @@ def lemmatization(lemmatizer, tagged):
     return result_lemma
 
 
-def processing(words, h_dictionary, emoticons_dictionary, emoji_dictionary):
+def processing(emotion, words, h_dictionary, emoticons_dictionary, emoji_dictionary):
+
+    myfile = open("../twitter_message/dataset_dt_" + emotion + "_60k.txt", "rt", encoding='utf-8')
+    contents = myfile.read()
+    myfile.close()
 
     for line in contents.splitlines():
         # 1. remove URL and USERNAME
@@ -206,13 +201,12 @@ def processing(words, h_dictionary, emoticons_dictionary, emoji_dictionary):
         # append array
         words.extend(filtered_sentence)
 
-        return {
-            "words": words,
-            "h_dictionary": h_dictionary,
-            "emoticons_dictionary": emoticons_dictionary,
-            "emoji_dictionary": emoji_dictionary
-        }
-
+    return {
+        "words": words,
+        "h_dictionary": h_dictionary,
+        "emoticons_dictionary": emoticons_dictionary,
+        "emoji_dictionary": emoji_dictionary
+    }
 
 
 client = pymongo.MongoClient("mongodb://localhost:27021/?readPreference=primary&appname=MongoDB%20Compass%20Community"
@@ -220,11 +214,14 @@ client = pymongo.MongoClient("mongodb://localhost:27021/?readPreference=primary&
 
 db = client['emotion']
 
-# dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
-dataset_sentiment = ["anger"]
+dataset_sentiment = ["anger", "anticipation", "disgust", "fear", "joy", "sadness", "surprise", "trust"]
 
 for emotion in dataset_sentiment:
 
+    # words array
+    words = []
+
+    # hashtag_dictionary array
     h_dictionary = []
 
     # emoticons_dictionary array
@@ -233,9 +230,7 @@ for emotion in dataset_sentiment:
     # emoji_dictionary array
     emoji_dictionary = []
 
-    words = []
-
-    result = processing(words, h_dictionary, emoticons_dictionary, emoji_dictionary)
+    result = processing(emotion, words, h_dictionary, emoticons_dictionary, emoji_dictionary)
 
     words = result.get('words')
     h_dictionary = result.get('h_dictionary')
@@ -246,14 +241,14 @@ for emotion in dataset_sentiment:
     emotion_word.remove()
     emotion_word.insert({'word': word} for word in words)
 
-    emotion_emoji = db[emotion + '_emoji']
-    emotion_emoji.remove()
-    emotion_emoji.insert({'word': emoji} for emoji in emoji_dictionary)
+    emotion_hashtag = db[emotion + '_hashtag']
+    emotion_hashtag.remove()
+    emotion_hashtag.insert({'word': hashtag} for hashtag in h_dictionary)
 
     emotion_emoticons = db[emotion + '_emoticons']
     emotion_emoticons.remove()
     emotion_emoticons.insert({'word': emoticon} for emoticon in emoticons_dictionary)
 
-    emotion_hashtag = db[emotion + '_hashtag']
-    emotion_hashtag.remove()
-    emotion_hashtag.insert({'word': hashtag} for hashtag in h_dictionary)
+    emotion_emoji = db[emotion + '_emoji']
+    emotion_emoji.remove()
+    emotion_emoji.insert({'word': emoji} for emoji in emoji_dictionary)
