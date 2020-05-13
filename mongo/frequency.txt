@@ -1,0 +1,9 @@
+anger_frequency: 6.03
+anticipation_frequency: 9.56
+disgust_frequency: 8.27
+fear_frequency: 4.55
+joy_frequency: 38.73
+sadness_frequency: 7.27
+surprise_frequency: 2.96
+trust_frequency: 7.30
+media = 10.58
