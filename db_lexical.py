@@ -48,6 +48,7 @@ def get_result_count_dict(result_count_dict):
     myfile.close()
     return ast.literal_eval(contents_twit)
 
+
 # for boolean attribute : set 1 if present in dictionary twitter
 def update_db(words, table_name, attributename, result_count_dict):
     # read file dictionary
@@ -113,13 +114,11 @@ dict_attribute_boolean = {"EmoSN_anger.txt" : 'emo_sn',
     "NRC_anger.txt" : 'nrc',
     "sentisense_anger.txt" : 'sentisense'}
 
-
 for element in dict_attribute_boolean:
     dict_lexical_archive = {}
     dict_lexical_archive.clear()
     dict_lexical_archive = get_lexical_archive("Anger", element)
     update_db(dict_lexical_archive, 'anger', dict_attribute_boolean.get(element), 'anger_global_dict_count')
-
 
 for element in dict_attribute_neg:
     dict_lexical_archive = {}
