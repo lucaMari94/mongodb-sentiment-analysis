@@ -403,9 +403,9 @@ joy_frequency_collection = db["joy_frequency"]
 joy_frequency_collection.update_many({}, {"$set": {"lexical_resources": []}})
 
 # for boolean attribute : set 1 if present in dictionary twitter
-update_record("Hope", "EmoSN_joy.txt", "NRC", joy_frequency_collection)
-update_record("Hope", "NRC_joy.txt", "NRC", joy_frequency_collection)
-update_record("Hope", "sentisense_joy.txt", "NRC", joy_frequency_collection)
+update_record("Joy", "EmoSN_joy.txt", "NRC", joy_frequency_collection)
+update_record("Joy", "NRC_joy.txt", "NRC", joy_frequency_collection)
+update_record("Joy", "sentisense_joy.txt", "NRC", joy_frequency_collection)
 
 # Neg
 update_record("Neg", "GI_NEG.txt", "GI_NEG", joy_frequency_collection)
@@ -532,8 +532,8 @@ surprise_frequency_collection = db["surprise_frequency"]
 surprise_frequency_collection.update_many({}, {"$set": {"lexical_resources": []}})
 
 # for boolean attribute : set 1 if present in dictionary twitter
-update_record("Sadness", "NRC_surprise.txt", "NRC", surprise_frequency_collection)
-update_record("Sadness", "sentisense_surprise.txt", "NRC", surprise_frequency_collection)
+update_record("Surprise", "NRC_surprise.txt", "NRC", surprise_frequency_collection)
+update_record("Surprise", "sentisense_surprise.txt", "NRC", surprise_frequency_collection)
 
 # Neg
 update_record("Neg", "GI_NEG.txt", "GI_NEG", surprise_frequency_collection)
@@ -596,7 +596,7 @@ trust_frequency_collection = db["trust_frequency"]
 trust_frequency_collection.update_many({}, {"$set": {"lexical_resources": []}})
 
 # for boolean attribute : set 1 if present in dictionary twitter
-update_record("Sadness", "NRC_trust.txt", "NRC", trust_frequency_collection)
+update_record("Trust", "NRC_trust.txt", "NRC", trust_frequency_collection)
 
 # Neg
 update_record("Neg", "GI_NEG.txt", "GI_NEG", trust_frequency_collection)
