@@ -233,6 +233,11 @@ for emotion in dataset_sentiment:
     result = processing(emotion, words, h_dictionary, emoticons_dictionary, emoji_dictionary)
 
     words = result.get('words')
+
+    with open('words.txt', 'w', encoding="utf-8") as f:
+        for item in words:
+            f.write("%s\n" % item)
+
     h_dictionary = result.get('h_dictionary')
     emoticons_dictionary = result.get('emoticons_dictionary')
     emoji_dictionary = result.get('emoji_dictionary')
