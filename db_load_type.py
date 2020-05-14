@@ -2,6 +2,7 @@ import mysql.connector
 import re
 import ast
 
+
 def get_lexical_archive(foldername, filename):
     # read file archive
     myfile = open("archive_risorse_lessicali/"+ foldername + "/" + filename, "rt", encoding='utf-8')
@@ -15,6 +16,7 @@ def get_lexical_archive(foldername, filename):
         if reg_expr.search(word) == None:
             words.append(word)
     return words
+
 
 def connect_to_db():
     try:
@@ -42,9 +44,9 @@ def insert_db(dict_lexical_archive,db,emotion,type):
             print(e)
 
 
-
 #############################################################################
-# Hope 
+# Hope
+
 
 #Anticipation
 
